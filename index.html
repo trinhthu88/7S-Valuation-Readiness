@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7S Valuation Readiness — Assessment</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1e3a8a;      /* deep navy */
+    --navy-ink:#0f1a49;  /* dark ink on light bg */
+    --aqua:#6ecbd1;      /* aqua/teal */
+    --lime:#d7ff00;      /* neon-lime accent */
+    --white:#ffffff;
+    --muted:#5b6b8c;
+    --line:#e6edf6;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background:var(--white);
+    color:var(--navy-ink);
+    font-family:'Montserrat',ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  }
+
+  /* Header */
+  header{
+    background:var(--navy);
+    color:#fff;
+    min-height:210px;
+    display:flex;align-items:center;
+    padding:28px 18px;
+  }
+  .header-inner{max-width:1200px;margin:0 auto;width:100%}
+  .tag{display:inline-block;background:var(--lime);color:#10200a;font-weight:800;padding:10px 12px;border-radius:10px;letter-spacing:.5px;font-size:12px}
+  header h1{margin:8px 0 0 0;text-transform:uppercase;letter-spacing:.5px;font-weight:800;font-size:26px;line-height:1.1}
+  header p{margin:6px 0 0 0;opacity:.95}
+
+  /* Main */
+  main{
+    max-width:1200px;
+    margin:16px auto 24px auto;
+    padding:0 18px 24px;
+  }
+  .grid{display:grid;grid-template-columns:1.15fr 1fr;gap:18px}
+  @media (max-width:980px){.grid{grid-template-columns:1fr}}
+
+  .card{background:#fff;border:2px solid var(--line);border-radius:16px;box-shadow:0 6px 24px rgba(20,35,90,.06);padding:16px}
+  .accent-aqua{border-color:var(--aqua)}
+  .accent-lime{border-color:var(--lime)}
+
+  h2{margin:0 0 8px 0;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;font-weight:800;font-size:18px}
+  h3{margin:12px 0 6px 0;text-transform:uppercase;letter-spacing:.4px;font-weight:700;color:var(--navy);font-size:14px}
+  .desc{font-size:13px;color:var(--muted)}
+
+  .section{margin:12px 0 18px;border-top:2px solid var(--aqua);padding-top:12px}
+  .section-header{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+  .section-header small{color:var(--muted);font-weight:600}
+  .q{display:grid;grid-template-columns:1fr auto;gap:10px;padding:10px 0;border-bottom:1px dashed #e9eef8}
+  .q:last-child{border-bottom:0}
+  .radios{display:flex;gap:10px}
+  .radios input{accent-color:var(--navy)}
+  .scale label{font-size:12px;color:var(--muted)}
+
+  .totals{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .pill{display:inline-block;padding:7px 12px;border-radius:999px;border:2px solid var(--aqua);background:#f8feff;color:var(--navy);font-size:12px;font-weight:700}
+  .badge{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:2px solid var(--lime);background:#fcffeb;color:#142b0a;font-weight:800;text-transform:uppercase;letter-spacing:.4px}
+  .badge.mid{border-color:#ffe08a;background:#fff9e6;color:#7a4a00}
+  .badge.low{border-color:#ffc9c9;background:#fff1f1;color:#6b0f0f}
+
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+  button{border:0;background:var(--navy);color:#fff;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:800;letter-spacing:.3px;text-transform:uppercase}
+  button.secondary{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+  button:hover{filter:brightness(.95)}
+
+  canvas{width:100%;height:auto;max-height:560px;background:#fff;border:3px solid var(--lime);border-radius:16px}
+  ul.rank{margin:8px 0 0 18px;padding:0} ul.rank li{margin:4px 0;font-weight:600;color:var(--navy-ink)}
+  footer{margin:24px 0 10px;text-align:center;color:var(--muted);font-size:12px}
+
+  /* Email form */
+  .email-form{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;margin:10px 0 12px}
+  .email-form label{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.3px}
+  .email-form input{width:100%;padding:10px 12px;border:2px solid var(--line);border-radius:10px;font-family:inherit}
+  .email-form button{white-space:nowrap}
+  @media (max-width:720px){.email-form{grid-template-columns:1fr;align-items:stretch}}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="tag">Workshop Tool</div>
+    <h1>From Numbers to Narrative — 7S Valuation Readiness</h1>
+    <p>Rate each statement 1–5 (1 = Never/Poor, 5 = Always/Excellent). Your 7S profile, rankings, and radar update live.</p>
+  </div>
+</header>
+
+<main>
+  <div class="grid">
+    <!-- LEFT -->
+    <section class="card accent-aqua" id="formCard">
+      <h2>Comprehensive 7S Valuation Assessment</h2>
+      <p class="desc">Each section totals to /25. Overall is /175. Radar uses section totals (scaled to 0–10) and shows the <b>/25</b> score at each point.</p>
+      <div id="sections"></div>
+      <div class="actions">
+        <button id="resetBtn" class="secondary">Reset</button>
+        <!-- Download removed by request -->
+      </div>
+    </section>
+
+    <!-- RIGHT -->
+    <section class="card accent-lime">
+      <h2>Your 7S Readiness</h2>
+
+      <!-- Email form -->
+      <form id="emailForm" class="email-form" onsubmit="return sendEmail(event);">
+        <div>
+          <label for="fullName">Your name</label>
+          <input id="fullName" name="fullName" type="text" placeholder="e.g., Nguyen Anh" required>
+        </div>
+        <div>
+          <label for="emailAddr">Your email</label>
+          <input id="emailAddr" name="emailAddr" type="email" inputmode="email" placeholder="you@example.com" required>
+        </div>
+        <div>
+          <button id="sendBtn" type="submit">Email my results</button>
+        </div>
+      </form>
+      <p id="sendStatus" class="desc" aria-live="polite"></p>
+
+      <div class="totals" style="margin:10px 0">
+        <div><span class="pill" id="overallPill">Total: 0 / 175</span></div>
+        <div><span class="pill" id="percentPill">0%</span></div>
+      </div>
+      <div class="badge" id="categoryBadge">Readiness: —</div>
+      <p class="desc" id="categoryText" style="margin-top:8px">Complete the assessment to see classification and radar.</p>
+
+      <canvas id="radar" width="920" height="560" aria-label="7S Readiness Radar"></canvas>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+        <div><h3>Top performers</h3><ul id="topList" class="rank"><li>–</li></ul></div>
+        <div><h3>Lowest performers</h3><ul id="lowList" class="rank"><li>–</li></ul></div>
+      </div>
+    </section>
+  </div>
+
+  <footer>© 2025 — 7S Valuation Readiness (interactive). No external JS libraries.</footer>
+</main>
+
+<script>
+/* ---------- Server endpoint (Apps Script Web App URL) ---------- */
+const EMAIL_ENDPOINT = 'YOUR_APPS_SCRIPT_WEB_APP_URL'; // <- paste your deployed URL here
+const CC_EMAIL = 'brian@hsp.consulting';
+
+/* ---------- Model ---------- */
+const model = [
+  { key:"Strategy", label:"Strategy Readiness", items:[
+    "We have a documented 3–5 year strategic plan that is reviewed and updated annually.",
+    "Our growth strategy includes specific market targets, resource requirements, and success metrics.",
+    "We systematically track competitive positioning and market trends to inform strategic decisions.",
+    "Our strategic priorities are clearly communicated and understood throughout the organization.",
+    "We have contingency plans for key business risks and market changes."
+  ]},
+  { key:"Structure", label:"Structure Readiness", items:[
+    "We have clear organizational charts with defined reporting relationships and decision authorities.",
+    "Our management team can make operational decisions without owner approval for routine matters.",
+    "We have documented job descriptions and performance expectations for all key roles.",
+    "Succession planning exists for critical positions including ownership transition.",
+    "We maintain appropriate governance structures (board meetings, management reviews, oversight)."
+  ]},
+  { key:"Systems", label:"Systems Readiness", items:[
+    "Monthly financial statements are produced within 15 business days of month-end.",
+    "Our core business processes are documented, standardized, and consistently followed.",
+    "We use integrated technology systems rather than manual spreadsheets for critical operations.",
+    "Key performance indicators are tracked systematically with regular management reporting.",
+    "Our data quality enables reliable forecasting and business analysis."
+  ]},
+  { key:"Shared Values", label:"Shared Values Readiness", items:[
+    "Our company mission, vision, and values are clearly defined and documented.",
+    "Company values guide decision-making consistently across the organization.",
+    "Our culture supports professional management and can survive ownership transition.",
+    "Employees understand and demonstrate company values in their daily work.",
+    "Our cultural strengths would be attractive to potential buyers or partners."
+  ]},
+  { key:"Style", label:"Style Readiness", items:[
+    "Leadership approach focuses on developing people rather than creating dependencies.",
+    "Management decisions are made through systematic processes rather than crisis response.",
+    "Communication flows effectively throughout the organization with regular feedback loops.",
+    "Leadership team demonstrates consistency in decision-making and problem-solving approaches.",
+    "Management style adapts appropriately to different situations and business needs."
+  ]},
+  { key:"Staff", label:"Staff Readiness", items:[
+    "We maintain low employee turnover with high engagement and job satisfaction.",
+    "Key capabilities are distributed across multiple people rather than concentrated in individuals.",
+    "We have effective recruitment, training, and development programs for critical roles.",
+    "Performance management system ensures accountability and supports career development.",
+    "Our team has the skills and experience to deliver results independently."
+  ]},
+  { key:"Skills", label:"Skills Readiness", items:[
+    "Our core competencies and institutional knowledge are documented and transferable.",
+    "We have sustainable competitive advantages that don't depend on individual relationships.",
+    "Critical skills and expertise can be maintained and developed under new ownership.",
+    "We invest in continuous learning and capability development across the organization.",
+    "Our skill base supports both current operations and future growth requirements."
+  ]}
+];
+
+/* ---------- Utilities ---------- */
+function cssVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+const COLORS = {
+  navy: cssVar('--navy') || '#1e3a8a',
+  aqua: cssVar('--aqua') || '#6ecbd1',
+  lime: cssVar('--lime') || '#d7ff00',
+  grid: '#d7eef1',
+  ink: cssVar('--navy-ink') || '#0f1a49'
+};
+
+const state = {
+  totals: [], overall: 0, percent: 0,
+  category: { label: '—', desc: '', cls: '' },
+  top: [], low: []
+};
+
+/* ---------- Build after DOM ready ---------- */
+document.addEventListener('DOMContentLoaded', () => {
+  const sectionsDiv = document.getElementById('sections');
+
+  model.forEach((sec, sIdx)=>{
+    const wrap = document.createElement('div');
+    wrap.className = 'section';
+
+    const header = document.createElement('div');
+    header.className = 'section-header';
+    header.innerHTML = `<h3>${sec.label}</h3><small id="sum_${sIdx}">Total: 0 / 25</small>`;
+    wrap.appendChild(header);
+
+    sec.items.forEach((text, qIdx)=>{
+      const row = document.createElement('div');
+      row.className = 'q';
+
+      const left = document.createElement('div');
+      left.textContent = (qIdx+1) + '. ' + text;
+
+      const right = document.createElement('div');
+      right.className = 'scale';
+
+      const radios = document.createElement('div');
+      radios.className = 'radios';
+
+      for(let v=1; v<=5; v++){
+        const id = `s${sIdx}_q${qIdx}_v${v}`;
+        const lbl = document.createElement('label');
+        lbl.htmlFor = id; lbl.title = v; lbl.style.cursor = 'pointer';
+        const input = document.createElement('input');
+        input.type = 'radio'; input.name = `s${sIdx}_q${qIdx}`; input.id = id; input.value = v;
+        if(v===3) input.checked = true;
+        input.addEventListener('change', computeAll);
+        lbl.appendChild(input);
+        lbl.appendChild(document.createTextNode(' '+v));
+        radios.appendChild(lbl);
+      }
+
+      const hint = document.createElement('label');
+      hint.textContent = ' (1 = Never/Poor, 5 = Always/Excellent)';
+      hint.style.fontSize = '12px'; hint.style.color = 'var(--muted)';
+
+      right.appendChild(radios);
+      right.appendChild(hint);
+
+      row.appendChild(left);
+      row.appendChild(right);
+      wrap.appendChild(row);
+    });
+
+    sectionsDiv.appendChild(wrap);
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', ()=>{
+    model.forEach((_, sIdx)=>{
+      for(let qIdx=0;qIdx<5;qIdx++){
+        const mid = document.getElementById(`s${sIdx}_q${qIdx}_v3`);
+        if(mid) mid.checked = true;
+      }
+    });
+    computeAll();
+  });
+
+  computeAll();
+});
+
+/* ---------- Scoring & Radar ---------- */
+function getSectionScore(sIdx){
+  let sum = 0;
+  for(let qIdx=0; qIdx<5; qIdx++){
+    const name = `s${sIdx}_q${qIdx}`;
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    sum += el ? parseInt(el.value,10) : 0;
+  }
+  return sum; // 0..25
+}
+
+function computeAll(){
+  const canvas = document.getElementById('radar');
+  const ctx = canvas.getContext('2d');
+  const totals = model.map((_, i)=> getSectionScore(i));
+
+  totals.forEach((t,i)=>{
+    const el = document.getElementById(`sum_${i}`);
+    if(el) el.textContent = `Total: ${t} / 25`;
+  });
+
+  const overall = totals.reduce((a,b)=>a+b,0);
+  const percent = Math.round((overall/175)*100);
+  document.getElementById('overallPill').textContent = `Total: ${overall} / 175`;
+  document.getElementById('percentPill').textContent = `${percent}%`;
+
+  const badge = document.getElementById('categoryBadge');
+  const badgeText = document.getElementById('categoryText');
+  let cat='', cls=''; let desc='';
+  if(overall>=150){cat='Transaction Ready (85–100%)'; desc='Strong foundation; professional systems; minimal buyer concerns; premium potential. Fine-tune and prepare for market.';}
+  else if(overall>=125){cat='Near Ready (70–84%)'; desc='Good foundation; address 2–3 priority gaps before market entry.';}
+  else if(overall>=100){cat='Development Needed (57–70%)'; cls='mid'; desc='Mixed performance; significant development likely required; potential valuation discount.';}
+  else{cat='Significant Gap (<57%)'; cls='low'; desc='Major development needed; high buyer risk across multiple areas; likely discount or deal complexity.';}
+  badge.className = `badge ${cls}`.trim();
+  badge.textContent = `Readiness: ${cat}`;
+  badgeText.textContent = desc;
+
+  const values10 = totals.map(v => (v/25)*10);
+  drawRadar(ctx, canvas, values10, totals);
+
+  const pairs = totals.map((v,i)=>({name:model[i].key, v}));
+  const top3 = [...pairs].sort((a,b)=>b.v-a.v).slice(0,3);
+  const low3 = [...pairs].sort((a,b)=>a.v-b.v).slice(0,3);
+  renderRank(document.getElementById('topList'), top3);
+  renderRank(document.getElementById('lowList'), low3);
+
+  // keep latest in state for email
+  state.totals = totals;
+  state.overall = overall;
+  state.percent = percent;
+  state.category = { label: cat, desc, cls };
+  state.top = top3;
+  state.low = low3;
+}
+
+function renderRank(container, arr){
+  container.innerHTML = '';
+  if(arr.length===0){ container.innerHTML = '<li>–</li>'; return; }
+  arr.forEach((p,i)=>{
+    const li = document.createElement('li');
+    li.textContent = `${i+1}. ${p.name} — ${p.v} / 25`;
+    container.appendChild(li);
+  });
+}
+
+function drawRadar(ctx, canvas, values, totals25){
+  const labels = model.map(m=>m.key);
+  const w = canvas.width, h = canvas.height;
+  ctx.clearRect(0,0,w,h);
+  const cx = w*0.5, cy = h*0.52;
+  const radius = Math.min(w,h)*0.36;
+  const maxVal = 10;
+  const N = values.length;
+
+  // grid
+  for(let l=1;l<=5;l++){
+    const r = radius*(l/5);
+    ctx.beginPath();
+    for(let i=0;i<N;i++){
+      const ang = -Math.PI/2 + (i/N)*Math.PI*2;
+      const x = cx + Math.cos(ang)*r;
+      const y = cy + Math.sin(ang)*r;
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.closePath();
+    ctx.lineWidth = (l===5)? 2.5 : 1;
+    ctx.strokeStyle = (l===5)? (getComputedStyle(document.documentElement).getPropertyValue('--lime').trim() || '#d7ff00') : '#d7eef1';
+    ctx.stroke();
+  }
+
+  // axes + labels
+  const navy = getComputedStyle(document.documentElement).getPropertyValue('--navy').trim() || '#1e3a8a';
+  ctx.fillStyle = navy;
+  ctx.font = '12px Montserrat, Arial, sans-serif';
+  labels.forEach((lab,i)=>{
+    const ang = -Math.PI/2 + (i/N)*Math.PI*2;
+    const x = cx + Math.cos(ang)*radius;
+    const y = cy + Math.sin(ang)*radius;
+    ctx.strokeStyle = '#d7eef1';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(x,y); ctx.stroke();
+    const lx = cx + Math.cos(ang)*(radius+22);
+    const ly = cy + Math.sin(ang)*(radius+22);
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(lab.toUpperCase(), lx, ly);
+  });
+
+  // polygon
+  ctx.beginPath();
+  values.forEach((v,i)=>{
+    const r = (v/maxVal)*radius;
+    const ang = -Math.PI/2 + (i/N)*Math.PI*2;
+    const x = cx + Math.cos(ang)*r;
+    const y = cy + Math.sin(ang)*r;
+    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+  });
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(110,203,209,.25)';
+  ctx.strokeStyle = navy;
+  ctx.lineWidth = 2;
+  ctx.fill(); ctx.stroke();
+
+  // dots + numeric labels
+  ctx.fillStyle = navy;
+  ctx.font = '12px Montserrat, Arial, sans-serif';
+  values.forEach((v,i)=>{
+    const r = (v/maxVal)*radius;
+    const ang = -Math.PI/2 + (i/N)*Math.PI*2;
+    const x = cx + Math.cos(ang)*r;
+    const y = cy + Math.sin(ang)*r;
+    ctx.beginPath(); ctx.arc(x,y,3.5,0,Math.PI*2); ctx.fill();
+    const off = 14;
+    const lx = cx + Math.cos(ang)*(r + off);
+    const ly = cy + Math.sin(ang)*(r + off);
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(`${totals25[i]} / 25`, lx, ly);
+  });
+}
+
+/* ---------- Email sending ---------- */
+function buildSummaryText(){
+  const lines = [];
+  lines.push('7S Valuation Readiness — Summary');
+  lines.push(new Date().toLocaleString());
+  lines.push('');
+  lines.push(`Overall: ${state.overall} / 175  (${state.percent}%)`);
+  lines.push(`Readiness: ${state.category.label}`);
+  lines.push(state.category.desc);
+  lines.push('');
+  lines.push('Per-section (/25):');
+  model.forEach((m,i)=> lines.push(`- ${m.key}: ${state.totals[i]} / 25`));
+  lines.push('');
+  lines.push('Top performers:');
+  state.top.forEach((t,i)=> lines.push(` ${i+1}. ${t.name} — ${t.v} / 25`));
+  lines.push('Lowest performers:');
+  state.low.forEach((t,i)=> lines.push(` ${i+1}. ${t.name} — ${t.v} / 25`));
+  return lines.join('\n');
+}
+
+async function sendEmail(e){
+  e.preventDefault();
+  // compute latest just in case
+  computeAll();
+
+  const name = document.getElementById('fullName').value.trim();
+  const email = document.getElementById('emailAddr').value.trim();
+  const status = document.getElementById('sendStatus');
+  const btn = document.getElementById('sendBtn');
+
+  if(!name || !email){
+    status.textContent = 'Please enter your name and a valid email.';
+    return false;
+  }
+
+  // capture radar PNG (base64 without prefix)
+  const canvas = document.getElementById('radar');
+  const dataUrl = canvas.toDataURL('image/png');
+  const base64 = dataUrl.split(',')[1];
+
+  const payload = {
+    name, email, cc: CC_EMAIL,
+    summary: buildSummaryText(),
+    radarBase64: base64
+  };
+
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  status.textContent = '';
+
+  try{
+    // Use text/plain to avoid CORS preflight with Apps Script
+    const res = await fetch(EMAIL_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type':'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+    if(!res.ok){ throw new Error('Network response not OK'); }
+    const data = await res.json().catch(()=>({ok:false}));
+    if(data && data.ok){
+      status.textContent = '✅ Sent! Please check your inbox.';
+    }else{
+      throw new Error('Mailer error');
+    }
+  }catch(err){
+    console.error(err);
+    status.textContent = '❌ Could not send email. Please try again later.';
+  }finally{
+    btn.disabled = false;
+    btn.textContent = 'Email my results';
+  }
+
+  return false;
+}
+</script>
+</body>
+</html>
