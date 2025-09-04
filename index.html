@@ -202,3 +202,407 @@ const model = [
     "Our core competencies and institutional knowledge are documented and transferable.",
     "We have sustainable competitive advantages that don't depend on individual relationships.",
     "Critical skills and expertise can be maintained and developed under new ownership.",
+    "We invest in continuous learning and capability development across the organization.",
+    "Our skill base supports both current operations and future growth requirements."
+  ]}
+];
+
+/* ---------- Utilities & state ---------- */
+function cssVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+const COLORS = {
+  navy: cssVar('--navy') || '#1e3a8a',
+  aqua: cssVar('--aqua') || '#6ecbd1',
+  lime: cssVar('--lime') || '#d7ff00',
+  grid: '#d7eef1',
+  ink: cssVar('--navy-ink') || '#0f1a49'
+};
+const state = {
+  totals: [], overall: 0, percent: 0,
+  category: { label: '—', desc: '', cls: '' },
+  top: [], low: []
+};
+function toBase64Utf8(str){
+  // handles Unicode safely
+  return btoa(unescape(encodeURIComponent(str)));
+}
+
+/* ---------- Build after DOM ready ---------- */
+document.addEventListener('DOMContentLoaded', () => {
+  const sectionsDiv = document.getElementById('sections');
+
+  model.forEach((sec, sIdx)=>{
+    const wrap = document.createElement('div');
+    wrap.className = 'section';
+
+    const header = document.createElement('div');
+    header.className = 'section-header';
+    header.innerHTML = `<h3>${sec.label}</h3><small id="sum_${sIdx}">Total: 0 / 25</small>`;
+    wrap.appendChild(header);
+
+    sec.items.forEach((text, qIdx)=>{
+      const row = document.createElement('div');
+      row.className = 'q';
+
+      const left = document.createElement('div');
+      left.textContent = (qIdx+1) + '. ' + text;
+
+      const right = document.createElement('div');
+      right.className = 'scale';
+
+      const radios = document.createElement('div');
+      radios.className = 'radios';
+
+      for(let v=1; v<=5; v++){
+        const id = `s${sIdx}_q${qIdx}_v${v}`;
+        const lbl = document.createElement('label');
+        lbl.htmlFor = id; lbl.title = v; lbl.style.cursor = 'pointer';
+        const input = document.createElement('input');
+        input.type = 'radio'; input.name = `s${sIdx}_q${qIdx}`; input.id = id; input.value = v;
+        if(v===3) input.checked = true;
+        input.addEventListener('change', computeAll);
+        lbl.appendChild(input);
+        lbl.appendChild(document.createTextNode(' '+v));
+        radios.appendChild(lbl);
+      }
+
+      const hint = document.createElement('label');
+      hint.textContent = ' (1 = Never/Poor, 5 = Always/Excellent)';
+      hint.style.fontSize = '12px'; hint.style.color = 'var(--muted)';
+
+      right.appendChild(radios);
+      right.appendChild(hint);
+
+      row.appendChild(left);
+      row.appendChild(right);
+      wrap.appendChild(row);
+    });
+
+    sectionsDiv.appendChild(wrap);
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', ()=>{
+    model.forEach((_, sIdx)=>{
+      for(let qIdx=0;qIdx<5;qIdx++){
+        const mid = document.getElementById(`s${sIdx}_q${qIdx}_v3`);
+        if(mid) mid.checked = true;
+      }
+    });
+    computeAll();
+  });
+
+  computeAll();
+});
+
+/* ---------- Scoring & Radar ---------- */
+function getSectionScore(sIdx){
+  let sum = 0;
+  for(let qIdx=0; qIdx<5; qIdx++){
+    const name = `s${sIdx}_q${qIdx}`;
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    sum += el ? parseInt(el.value,10) : 0;
+  }
+  return sum; // 0..25
+}
+
+function computeAll(){
+  const canvas = document.getElementById('radar');
+  const ctx = canvas.getContext('2d');
+  const totals = model.map((_, i)=> getSectionScore(i));
+
+  totals.forEach((t,i)=>{
+    const el = document.getElementById(`sum_${i}`);
+    if(el) el.textContent = `Total: ${t} / 25`;
+  });
+
+  const overall = totals.reduce((a,b)=>a+b,0);
+  const percent = Math.round((overall/175)*100);
+  document.getElementById('overallPill').textContent = `Total: ${overall} / 175`;
+  document.getElementById('percentPill').textContent = `${percent}%`;
+
+  const badge = document.getElementById('categoryBadge');
+  const badgeText = document.getElementById('categoryText');
+  let cat='', cls=''; let desc='';
+  if(overall>=150){cat='Transaction Ready (85–100%)'; desc='Strong foundation; professional systems; minimal buyer concerns; premium potential. Fine-tune and prepare for market.';}
+  else if(overall>=125){cat='Near Ready (70–84%)'; desc='Good foundation; address 2–3 priority gaps before market entry.';}
+  else if(overall>=100){cat='Development Needed (57–70%)'; cls='mid'; desc='Mixed performance; significant development likely required; potential valuation discount.';}
+  else{cat='Significant Gap (<57%)'; cls='low'; desc='Major development needed; high buyer risk across multiple areas; likely discount or deal complexity.';}
+  badge.className = `badge ${cls}`.trim();
+  badge.textContent = `Readiness: ${cat}`;
+  badgeText.textContent = desc;
+
+  const values10 = totals.map(v => (v/25)*10);
+  drawRadar(ctx, canvas, values10, totals);
+
+  const pairs = totals.map((v,i)=>({name:model[i].key, v}));
+  const top3 = [...pairs].sort((a,b)=>b.v-a.v).slice(0,3);
+  const low3 = [...pairs].sort((a,b)=>a.v-b.v).slice(0,3);
+  renderRank(document.getElementById('topList'), top3);
+  renderRank(document.getElementById('lowList'), low3);
+
+  // keep latest in state for email
+  state.totals = totals;
+  state.overall = overall;
+  state.percent = percent;
+  state.category = { label: cat, desc, cls };
+  state.top = top3;
+  state.low = low3;
+}
+
+function renderRank(container, arr){
+  container.innerHTML = '';
+  if(arr.length===0){ container.innerHTML = '<li>–</li>'; return; }
+  arr.forEach((p,i)=>{
+    const li = document.createElement('li');
+    li.textContent = `${i+1}. ${p.name} — ${p.v} / 25`;
+    container.appendChild(li);
+  });
+}
+
+function drawRadar(ctx, canvas, values, totals25){
+  const labels = model.map(m=>m.key);
+  const w = canvas.width, h = canvas.height;
+  ctx.clearRect(0,0,w,h);
+  const cx = w*0.5, cy = h*0.52;
+  const radius = Math.min(w,h)*0.36;
+  const maxVal = 10;
+  const N = values.length;
+
+  // grid
+  for(let l=1;l<=5;l++){
+    const r = radius*(l/5);
+    ctx.beginPath();
+    for(let i=0;i<N;i++){
+      const ang = -Math.PI/2 + (i/N)*Math.PI*2;
+      const x = cx + Math.cos(ang)*r;
+      const y = cy + Math.sin(ang)*r;
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.closePath();
+    ctx.lineWidth = (l===5)? 2.5 : 1;
+    ctx.strokeStyle = (l===5)? (getComputedStyle(document.documentElement).getPropertyValue('--lime').trim() || '#d7ff00') : '#d7eef1';
+    ctx.stroke();
+  }
+
+  // axes + labels
+  const navy = getComputedStyle(document.documentElement).getPropertyValue('--navy').trim() || '#1e3a8a';
+  ctx.fillStyle = navy;
+  ctx.font = '12px Montserrat, Arial, sans-serif';
+  labels.forEach((lab,i)=>{
+    const ang = -Math.PI/2 + (i/N)*Math.PI*2;
+    const x = cx + Math.cos(ang)*radius;
+    const y = cy + Math.sin(ang)*radius;
+    ctx.strokeStyle = '#d7eef1';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(x,y); ctx.stroke();
+    const lx = cx + Math.cos(ang)*(radius+22);
+    const ly = cy + Math.sin(ang)*(radius+22);
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(lab.toUpperCase(), lx, ly);
+  });
+
+  // polygon
+  ctx.beginPath();
+  values.forEach((v,i)=>{
+    const r = (v/maxVal)*radius;
+    const ang = -Math.PI/2 + (i/N)*Math.PI*2;
+    const x = cx + Math.cos(ang)*r;
+    const y = cy + Math.sin(ang)*r;
+    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+  });
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(110,203,209,.25)';
+  ctx.strokeStyle = navy;
+  ctx.lineWidth = 2;
+  ctx.fill(); ctx.stroke();
+
+  // dots + numeric labels
+  ctx.fillStyle = navy;
+  ctx.font = '12px Montserrat, Arial, sans-serif';
+  values.forEach((v,i)=>{
+    const r = (v/maxVal)*radius;
+    const ang = -Math.PI/2 + (i/N)*Math.PI*2;
+    const x = cx + Math.cos(ang)*r;
+    const y = cy + Math.sin(ang)*r;
+    ctx.beginPath(); ctx.arc(x,y,3.5,0,Math.PI*2); ctx.fill();
+    const off = 14;
+    const lx = cx + Math.cos(ang)*(r + off);
+    const ly = cy + Math.sin(ang)*(r + off);
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(`${totals25[i]} / 25`, lx, ly);
+  });
+}
+
+/* ---------- Collect full results ---------- */
+function collectAnswers(){
+  const responses = [];
+  model.forEach((sec, sIdx)=>{
+    const secObj = { sectionKey: sec.key, sectionLabel: sec.label, questions: [] };
+    sec.items.forEach((text, qIdx)=>{
+      const name = `s${sIdx}_q${qIdx}`;
+      const el = document.querySelector(`input[name="${name}"]:checked`);
+      const val = el ? parseInt(el.value,10) : 0;
+      secObj.questions.push({ index: qIdx+1, text, value: val });
+    });
+    responses.push(secObj);
+  });
+  return responses;
+}
+
+function buildSummaryText(name='', email=''){
+  const lines = [];
+  lines.push('7S Valuation Readiness — Summary');
+  lines.push(new Date().toLocaleString());
+  if(name) lines.push('Name: ' + name);
+  if(email) lines.push('Email: ' + email);
+  lines.push('');
+  lines.push(`Overall: ${state.overall} / 175  (${state.percent}%)`);
+  lines.push(`Readiness: ${state.category.label}`);
+  lines.push(state.category.desc);
+  lines.push('');
+  lines.push('Per-section (/25):');
+  model.forEach((m,i)=> lines.push(`- ${m.key}: ${state.totals[i]} / 25`));
+  lines.push('');
+  lines.push('Top performers:');
+  state.top.forEach((t,i)=> lines.push(` ${i+1}. ${t.name} — ${t.v} / 25`));
+  lines.push('Lowest performers:');
+  state.low.forEach((t,i)=> lines.push(` ${i+1}. ${t.name} — ${t.v} / 25`));
+  lines.push('');
+  lines.push('Detailed responses:');
+  const answers = collectAnswers();
+  answers.forEach(sec=>{
+    lines.push(`\n[${sec.sectionKey}] ${sec.sectionLabel}`);
+    sec.questions.forEach(q=>{
+      lines.push(`  Q${q.index}: (${q.value}) ${q.text}`);
+    });
+  });
+  return lines.join('\n');
+}
+
+function buildAnswersCsv(name, email){
+  const rows = [];
+  rows.push(['Timestamp','Name','Email','Section','Question #','Score','Question Text']);
+  const ts = new Date().toISOString();
+  const answers = collectAnswers();
+  answers.forEach(sec=>{
+    sec.questions.forEach(q=>{
+      rows.push([ts, name, email, sec.sectionKey, q.index, q.value, q.text]);
+    });
+  });
+  // CSV encode
+  const esc = v => {
+    const s = String(v ?? '');
+    return /[",\n]/.test(s) ? `"${s.replace(/"/g,'""')}"` : s;
+  };
+  return rows.map(r=> r.map(esc).join(',')).join('\n');
+}
+
+/* ---------- Email sending ---------- */
+async function sendEmail(e){
+  e.preventDefault();
+  computeAll();
+
+  const name = document.getElementById('fullName').value.trim();
+  const email = document.getElementById('emailAddr').value.trim();
+  const status = document.getElementById('sendStatus');
+  const btn = document.getElementById('sendBtn');
+
+  if(!name || !email){
+    status.textContent = 'Please enter your name and a valid email.';
+    return false;
+  }
+  if(!EMAIL_ENDPOINT || EMAIL_ENDPOINT === 'YOUR_APPS_SCRIPT_WEB_APP_URL'){
+    status.textContent = 'Mailer not configured. Please set EMAIL_ENDPOINT.';
+    return false;
+  }
+
+  // capture radar PNG (base64 without prefix)
+  const canvas = document.getElementById('radar');
+  const dataUrl = canvas.toDataURL('image/png');
+  const radarBase64 = dataUrl.split(',')[1];
+
+  // build attachments
+  const summaryText = buildSummaryText(name, email);
+  const answersCsv = buildAnswersCsv(name, email);
+  const jsonObj = {
+    timestamp: new Date().toISOString(),
+    name, email,
+    overall: state.overall, percent: state.percent,
+    category: state.category,
+    totalsBySection: model.map((m,i)=>({ key:m.key, label:m.label, total: state.totals[i] })),
+    top: state.top, low: state.low,
+    answers: collectAnswers()
+  };
+  const jsonText = JSON.stringify(jsonObj, null, 2);
+
+  const payload = {
+    name, email, cc: CC_EMAIL,
+    summary: summaryText,
+    radarBase64,
+    summaryBase64: toBase64Utf8(summaryText),
+    summaryFilename: '7S_summary.txt',
+    csvBase64: toBase64Utf8(answersCsv),
+    csvFilename: '7S_answers.csv',
+    jsonBase64: toBase64Utf8(jsonText),
+    jsonFilename: '7S_results.json'
+  };
+
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  status.textContent = '';
+
+  const markSuccess = () => {
+    status.textContent = '✅ Sent! Please check your inbox.';
+    btn.disabled = false;
+    btn.textContent = 'Email my results';
+  };
+  const markError = (msg='❌ Could not send email. Please try again later.') => {
+    status.textContent = msg;
+    btn.disabled = false;
+    btn.textContent = 'Email my results';
+  };
+
+  try {
+    const res = await fetch(EMAIL_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type':'text/plain;charset=utf-8' }, // avoids preflight
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      try {
+        const data = await res.json();
+        if (data && data.ok) return markSuccess();
+        const t = await res.text().catch(()=>null);
+        return markError(t ? `❌ Mailer error: ${t}` : '❌ Mailer responded but did not confirm success.');
+      } catch(_){
+        // JSON unreadable (CORS). 2xx still means server ran; treat as success.
+        return markSuccess();
+      }
+    } else {
+      if (res.status === 401 || res.status === 403) {
+        return markError('❌ Access denied: set Apps Script Web App access to “Anyone”.');
+      }
+      if (res.status === 404) {
+        return markError('❌ Endpoint not found: double-check you pasted the /exec URL.');
+      }
+      return markError(`❌ HTTP ${res.status}: please re-deploy your Web App and use the /exec URL.`);
+    }
+  } catch (err) {
+    // Fallback: opaque no-cors (server still executes doPost)
+    try {
+      await fetch(EMAIL_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type':'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+      return markSuccess();
+    } catch (err2) {
+      console.error('Mailer error:', err, err2);
+      return markError();
+    }
+  }
+}
+</script>
+</body>
+</html>
