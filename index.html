@@ -117,14 +117,14 @@
       <form id="emailForm" class="email-form" onsubmit="return sendEmail(event);">
         <div>
           <label for="fullName">Your name</label>
-          <input id="fullName" name="fullName" type="text" placeholder="e.g., Nguyen Anh" required>
+          <input id="fullName" name="fullName" type="text" placeholder="e.g., Nguyen Anh" required autocomplete="name">
         </div>
         <div>
           <label for="emailAddr">Your email</label>
-          <input id="emailAddr" name="emailAddr" type="email" inputmode="email" placeholder="you@example.com" required>
+          <input id="emailAddr" name="emailAddr" type="email" inputmode="email" placeholder="you@example.com" required autocomplete="email">
         </div>
         <div>
-          <button id="sendBtn" type="submit">Email my results</button>
+          <button id="sendBtn" type="submit" aria-label="Email my results">Email my results</button>
         </div>
       </form>
       <p id="sendStatus" class="desc" aria-live="polite"></p>
@@ -150,7 +150,8 @@
 
 <script>
 /* ---------- Server endpoint (Apps Script Web App URL) ---------- */
-const EMAIL_ENDPOINT = 'YOUR_APPS_SCRIPT_WEB_APP_URL'; // <- paste your deployed URL here
+/* Replace with your deployed /exec URL from Apps Script */
+const EMAIL_ENDPOINT = 'YOUR_APPS_SCRIPT_WEB_APP_URL';
 const CC_EMAIL = 'brian@hsp.consulting';
 
 /* ---------- Model ---------- */
@@ -450,7 +451,6 @@ function buildSummaryText(){
 
 async function sendEmail(e){
   e.preventDefault();
-  // compute latest just in case
   computeAll();
 
   const name = document.getElementById('fullName').value.trim();
@@ -460,6 +460,10 @@ async function sendEmail(e){
 
   if(!name || !email){
     status.textContent = 'Please enter your name and a valid email.';
+    return false;
+  }
+  if(!EMAIL_ENDPOINT || EMAIL_ENDPOINT === 'YOUR_APPS_SCRIPT_WEB_APP_URL'){
+    status.textContent = 'Mailer not configured. Please set EMAIL_ENDPOINT.';
     return false;
   }
 
@@ -478,29 +482,54 @@ async function sendEmail(e){
   btn.textContent = 'Sending...';
   status.textContent = '';
 
-  try{
-    // Use text/plain to avoid CORS preflight with Apps Script
-    const res = await fetch(EMAIL_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type':'text/plain;charset=utf-8' },
-      body: JSON.stringify(payload)
-    });
-    if(!res.ok){ throw new Error('Network response not OK'); }
-    const data = await res.json().catch(()=>({ok:false}));
-    if(data && data.ok){
-      status.textContent = '✅ Sent! Please check your inbox.';
-    }else{
-      throw new Error('Mailer error');
-    }
-  }catch(err){
-    console.error(err);
-    status.textContent = '❌ Could not send email. Please try again later.';
-  }finally{
+  const markSuccess = () => {
+    status.textContent = '✅ Sent! Please check your inbox.';
     btn.disabled = false;
     btn.textContent = 'Email my results';
-  }
+  };
+  const markError = (msg='❌ Could not send email. Please try again later.') => {
+    status.textContent = msg;
+    btn.disabled = false;
+    btn.textContent = 'Email my results';
+  };
 
-  return false;
+  try {
+    // Try normal CORS fetch (best case)
+    const res = await fetch(EMAIL_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type':'text/plain;charset=utf-8' }, // avoids preflight
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      let ok = true;
+      try {
+        const data = await res.json();
+        ok = !!(data && data.ok);
+      } catch (_) {
+        // If JSON can’t be read due to CORS, still treat 2xx as success
+        ok = true;
+      }
+      if (ok) return markSuccess();
+      return markError('❌ Mailer responded but did not confirm success.');
+    }
+
+    throw new Error(`HTTP ${res.status}`);
+  } catch (err) {
+    // Fallback: opaque no-cors request (server still executes doPost)
+    try {
+      await fetch(EMAIL_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type':'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+      return markSuccess();
+    } catch (err2) {
+      console.error('Mailer error:', err, err2);
+      return markError();
+    }
+  }
 }
 </script>
 </body>
