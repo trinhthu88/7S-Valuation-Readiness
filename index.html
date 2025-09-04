@@ -510,7 +510,7 @@ async function sendEmail(e){
     status.textContent = 'Please enter your name and a valid email.';
     return false;
   }
-  if(!EMAIL_ENDPOINT || EMAIL_ENDPOINT === 'YOUR_APPS_SCRIPT_WEB_APP_URL'){
+  if(!EMAIL_ENDPOINT || EMAIL_ENDPOINT === 'https://script.google.com/macros/s/AKfycbxYOURID/exec'){
     status.textContent = 'Mailer not configured. Please set EMAIL_ENDPOINT.';
     return false;
   }
