@@ -156,7 +156,7 @@
 <script>
 /* ---------- Mail settings ---------- */
 /* If you have Apps Script, paste your /exec here. If left as-is, we fall back to mailto. */
-const EMAIL_ENDPOINT = 'YOUR_APPS_SCRIPT_WEB_APP_URL';
+cconst EMAIL_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyPXSapa5ZXeaX3Yjbo7IWDAqbENVRBcFOJcGizJ6OCd0e721ngIUB8zgMIc--E4eJxfA/exec';
 const OWNER_EMAIL = 'trang.tt@hsp.consulting';   // where simple emails go
 const CC_EMAIL    = 'brian@hsp.consulting';      // cc when using backend
 
@@ -374,7 +374,7 @@ async function sendEmail(e){
   if(!name || !email){ status.textContent='Please enter your name and a valid email. · Vui lòng nhập tên và email hợp lệ.'; return false; }
 
   // If Apps Script is configured, use it (sends to client + CC)
-  if(EFFECTIVE_ENDPOINT && EFFECTIVE_ENDPOINT !== 'YOUR_APPS_SCRIPT_WEB_APP_URL'){
+  if(EFFECTIVE_ENDPOINT && EFFECTIVE_ENDPOINT !== 'https://script.google.com/macros/s/AKfycbyPXSapa5ZXeaX3Yjbo7IWDAqbENVRBcFOJcGizJ6OCd0e721ngIUB8zgMIc--E4eJxfA/exec'){
     const canvas=document.getElementById('radar'); const radarBase64=canvas.toDataURL('image/png').split(',')[1];
     const summaryText=buildSummaryText(name,email);
 
