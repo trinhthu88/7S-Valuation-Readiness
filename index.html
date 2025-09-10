@@ -7,61 +7,41 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#1e3a8a;      /* deep navy */
-    --navy-ink:#0f1a49;  /* dark ink on light bg */
-    --aqua:#6ecbd1;      /* aqua/teal */
-    --lime:#d7ff00;      /* neon-lime accent */
+    --navy:#1e3a8a;
+    --navy-ink:#0f1a49;
+    --aqua:#6ecbd1;
+    --lime:#d7ff00;
     --white:#ffffff;
     --muted:#5b6b8c;
     --line:#e6edf6;
   }
-
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0;
-    background:var(--white);
-    color:var(--navy-ink);
+    margin:0;background:var(--white);color:var(--navy-ink);
     font-family:'Montserrat',ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
   }
-
-  /* Header */
   header{
-    background:var(--navy);
-    color:#fff;
-    min-height:210px;
-    display:flex;align-items:center;
-    padding:28px 18px;
+    background:var(--navy);color:#fff;min-height:210px;
+    display:flex;align-items:center;padding:28px 18px;
   }
   .header-inner{max-width:1200px;margin:0 auto;width:100%}
   .tag{display:inline-block;background:var(--lime);color:#10200a;font-weight:800;padding:10px 12px;border-radius:10px;letter-spacing:.5px;font-size:12px}
   header h1{margin:8px 0 0 0;text-transform:uppercase;letter-spacing:.5px;font-weight:800;font-size:24px;line-height:1.15}
   header p{margin:6px 0 0 0;opacity:.95}
-
-  /* Dual-language helper styles */
   .en{display:block}
   .vi{display:block;color:var(--muted)}
   .label-duo{line-height:1.25}
-  .vi.small{font-size:12px}
-  .en.small{font-size:12px}
-
-  /* Main */
-  main{
-    max-width:1200px;
-    margin:16px auto 24px auto;
-    padding:0 18px 24px;
-  }
+  .vi.small,.en.small{font-size:12px}
+  main{max-width:1200px;margin:16px auto 24px auto;padding:0 18px 24px}
   .grid{display:grid;grid-template-columns:1.15fr 1fr;gap:18px}
   @media (max-width:980px){.grid{grid-template-columns:1fr}}
-
   .card{background:#fff;border:2px solid var(--line);border-radius:16px;box-shadow:0 6px 24px rgba(20,35,90,.06);padding:16px}
   .accent-aqua{border-color:var(--aqua)}
   .accent-lime{border-color:var(--lime)}
-
   h2{margin:0 0 8px 0;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;font-weight:800;font-size:18px}
   h3{margin:12px 0 6px 0;text-transform:uppercase;letter-spacing:.4px;font-weight:700;color:var(--navy);font-size:14px}
   .desc{font-size:13px;color:var(--muted)}
-
   .section{margin:12px 0 18px;border-top:2px solid var(--aqua);padding-top:12px}
   .section-header{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
   .section-header small{color:var(--muted);font-weight:600}
@@ -70,28 +50,23 @@
   .radios{display:flex;gap:10px}
   .radios input{accent-color:var(--navy)}
   .scale label{font-size:12px;color:var(--muted)}
-
   .totals{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
   .pill{display:inline-block;padding:7px 12px;border-radius:999px;border:2px solid var(--aqua);background:#f8feff;color:var(--navy);font-size:12px;font-weight:700}
   .badge{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:2px solid var(--lime);background:#fcffeb;color:#142b0a;font-weight:800;text-transform:uppercase;letter-spacing:.4px}
   .badge.mid{border-color:#ffe08a;background:#fff9e6;color:#7a4a00}
   .badge.low{border-color:#ffc9c9;background:#fff1f1;color:#6b0f0f}
-
   .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
   button{border:0;background:var(--navy);color:#fff;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:800;letter-spacing:.3px;text-transform:uppercase}
   button.secondary{background:#fff;color:var(--navy);border:2px solid var(--navy)}
   button:hover{filter:brightness(.95)}
-
   canvas{width:100%;height:auto;max-height:560px;background:#fff;border:3px solid var(--lime);border-radius:16px}
   ul.rank{margin:8px 0 0 18px;padding:0} ul.rank li{margin:4px 0;font-weight:600;color:var(--navy-ink)}
   footer{margin:24px 0 10px;text-align:center;color:var(--muted);font-size:12px}
-
-  /* Email form */
   .email-form{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;margin:10px 0 12px}
   .email-form label{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.3px}
   .email-form input{width:100%;padding:10px 12px;border:2px solid var(--line);border-radius:10px;font-family:inherit}
   .email-form button{white-space:nowrap}
-  @media (max-width:720px){.email-form{grid-template-columns:1fr;align-items:stretch}}
+  @media (max-width:720px){.email-form{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -104,7 +79,7 @@
     </h1>
     <p class="label-duo">
       <span class="en">Rate each statement 1–5 (1 = Never/Poor, 5 = Always/Excellent). Your 7S profile, rankings, and radar update live.</span>
-      <span class="vi">Đánh giá điểm cho từng nội dung theo thang 1–5 (1 = Chưa bao giờ/Rất kém, 5 = Luôn luôn/Xuất sắc). Hồ sơ, xếp hạng và biểu đồ radar 7S của bạn cập nhật theo thời gian thực.</span>
+      <span class="vi">Đánh giá 1–5 (1 = Chưa bao giờ/Rất kém, 5 = Luôn luôn/Xuất sắc). Hồ sơ, xếp hạng và radar 7S cập nhật theo thời gian thực.</span>
     </p>
   </div>
 </header>
@@ -115,11 +90,11 @@
     <section class="card accent-aqua" id="formCard">
       <h2 class="label-duo">
         <span class="en">Comprehensive 7S Valuation Assessment</span>
-        <span class="vi">Đánh giá toàn diện khả năng định giá theo mô hình 7S</span>
+        <span class="vi">Đánh giá toàn diện theo mô hình 7S</span>
       </h2>
       <p class="desc label-duo">
         <span class="en">Each section totals to /25. Overall is /175. Radar uses section totals (scaled to 0–10) and shows the <b>/25</b> score at each point.</span>
-        <span class="vi">Mỗi lĩnh vực tối đa 25 điểm. Tổng điểm toàn bộ là 175. Biểu đồ radar sử dụng tổng điểm từng lĩnh vực (quy đổi 0–10) và hiển thị điểm <b>…/25</b> tại mỗi điểm trên biểu đồ.</span>
+        <span class="vi">Mỗi lĩnh vực tối đa 25 điểm; tổng 175. Biểu đồ radar quy đổi 0–10 và hiển thị điểm <b>…/25</b> tại từng trục.</span>
       </p>
       <div id="sections"></div>
       <div class="actions">
@@ -131,10 +106,9 @@
     <section class="card accent-lime">
       <h2 class="label-duo">
         <span class="en">Your 7S Readiness</span>
-        <span class="vi">Mức độ sẵn sàng theo mô hình 7S của bạn</span>
+        <span class="vi">Mức độ sẵn sàng 7S</span>
       </h2>
 
-      <!-- Email form -->
       <form id="emailForm" class="email-form" onsubmit="return sendEmail(event);">
         <div>
           <label for="fullName" class="label-duo">
@@ -149,7 +123,7 @@
           <input id="emailAddr" name="emailAddr" type="email" inputmode="email" placeholder="you@example.com" required autocomplete="email">
         </div>
         <div>
-          <button id="sendBtn" type="submit" aria-label="Email my results">Email my results · Gửi kết quả</button>
+          <button id="sendBtn" type="submit">Email my results · Gửi kết quả</button>
         </div>
       </form>
       <p id="sendStatus" class="desc" aria-live="polite"></p>
@@ -159,7 +133,7 @@
         <div><span class="pill" id="percentPill">0%</span></div>
       </div>
       <div class="badge" id="categoryBadge">Readiness / Mức độ: —</div>
-      <p class="desc" id="categoryText" style="margin-top:8px">Complete the assessment to see classification and radar. · Hoàn tất bài đánh giá để xem phân loại và biểu đồ radar.</p>
+      <p class="desc" id="categoryText" style="margin-top:8px">Complete the assessment… · Hoàn tất bài đánh giá để xem phân loại & radar.</p>
 
       <canvas id="radar" width="920" height="560" aria-label="7S Readiness Radar"></canvas>
 
@@ -176,165 +150,119 @@
     </section>
   </div>
 
-  <footer>© 2025 — 7S Valuation Readiness (interactive) · Bản tương tác song ngữ. No external JS libraries.</footer>
+  <footer>© 2025 — 7S Valuation Readiness (interactive) · Song ngữ. No external JS libraries.</footer>
 </main>
 
 <script>
-/* ---------- Server endpoint (Apps Script Web App URL) ---------- */
-/* Replace with your deployed /exec URL from Apps Script */
+/* ---------- Mail settings ---------- */
+/* If you have Apps Script, paste your /exec here. If left as-is, we fall back to mailto. */
 const EMAIL_ENDPOINT = 'YOUR_APPS_SCRIPT_WEB_APP_URL';
-const CC_EMAIL = 'brian@hsp.consulting';
+const OWNER_EMAIL = 'trang.tt@hsp.consulting';   // where simple emails go
+const CC_EMAIL    = 'brian@hsp.consulting';      // cc when using backend
 
-/* Optional: allow overriding via ?endpoint=... and persist in localStorage */
+/* Optional: override via ?endpoint=... */
 const _qs = new URLSearchParams(location.search);
 const _qsEndpoint = (_qs.get('endpoint') || '').trim();
 if (_qsEndpoint) localStorage.setItem('EMAIL_ENDPOINT', _qsEndpoint);
 const EFFECTIVE_ENDPOINT = (_qsEndpoint || localStorage.getItem('EMAIL_ENDPOINT') || EMAIL_ENDPOINT).trim();
 
-/* ---------- Model (bilingual) ---------- */
+/* ---------- Bilingual model ---------- */
 const model = [
   { keyEn:"Strategy", keyVi:"Chiến lược", labelEn:"Strategy Readiness", labelVi:"Mức độ Sẵn sàng về Chiến lược", items:[
-    {en:"We have a documented 3–5 year strategic plan that is reviewed and updated annually.", vi:"Chúng tôi có một kế hoạch chiến lược được lập cho giai đoạn 3–5 năm, được rà soát và cập nhật hàng năm."},
-    {en:"Our growth strategy includes specific market targets, resource requirements, and success metrics.", vi:"Chiến lược tăng trưởng của chúng tôi bao gồm các mục tiêu thị trường cụ thể, yêu cầu về nguồn lực và các chỉ số đo lường thành công."},
-    {en:"We systematically track competitive positioning and market trends to inform strategic decisions.", vi:"Chúng tôi theo dõi một cách có hệ thống vị thế cạnh tranh và xu hướng thị trường để hỗ trợ ra quyết định chiến lược."},
-    {en:"Our strategic priorities are clearly communicated and understood throughout the organization.", vi:"Các ưu tiên chiến lược được truyền đạt rõ ràng và được hiểu xuyên suốt trong toàn doanh nghiệp."},
-    {en:"We have contingency plans for key business risks and market changes.", vi:"Chúng tôi có các kế hoạch dự phòng để ứng phó với những rủi ro kinh doanh trọng yếu và thay đổi của thị trường."}
+    {en:"We have a documented 3–5 year strategic plan that is reviewed and updated annually.", vi:"Chúng tôi có kế hoạch chiến lược 3–5 năm, rà soát & cập nhật hàng năm."},
+    {en:"Our growth strategy includes specific market targets, resource requirements, and success metrics.", vi:"Chiến lược tăng trưởng gồm mục tiêu thị trường, nguồn lực & chỉ số thành công cụ thể."},
+    {en:"We systematically track competitive positioning and market trends to inform strategic decisions.", vi:"Theo dõi có hệ thống vị thế cạnh tranh & xu hướng thị trường để hỗ trợ quyết định chiến lược."},
+    {en:"Our strategic priorities are clearly communicated and understood throughout the organization.", vi:"Ưu tiên chiến lược được truyền đạt rõ ràng và thấu hiểu trong toàn doanh nghiệp."},
+    {en:"We have contingency plans for key business risks and market changes.", vi:"Có kế hoạch dự phòng cho rủi ro trọng yếu và biến động thị trường."}
   ]},
   { keyEn:"Structure", keyVi:"Cơ cấu", labelEn:"Structure Readiness", labelVi:"Mức độ sẵn sàng về Cơ cấu tổ chức", items:[
-    {en:"We have clear organizational charts with defined reporting relationships and decision authorities.", vi:"Chúng tôi có sơ đồ tổ chức rõ ràng, thể hiện đầy đủ mối quan hệ báo cáo và quyền ra quyết định."},
-    {en:"Our management team can make operational decisions without owner approval for routine matters.", vi:"Ban quản trị có thể đưa ra quyết định vận hành thường nhật mà không cần sự phê duyệt trực tiếp từ chủ sở hữu."},
-    {en:"We have documented job descriptions and performance expectations for all key roles.", vi:"Chúng tôi có bản mô tả công việc và kỳ vọng về hiệu suất cho tất cả các vị trí chủ chốt."},
-    {en:"Succession planning exists for critical positions including ownership transition.", vi:"Doanh nghiệp có kế hoạch kế nhiệm cho các vị trí quan trọng, bao gồm cả lộ trình chuyển giao quyền sở hữu."},
-    {en:"We maintain appropriate governance structures (board meetings, management reviews, oversight).", vi:"Chúng tôi duy trì hệ thống quản trị phù hợp (các cuộc họp hội đồng, rà soát quản lý, cơ chế giám sát)."}
+    {en:"We have clear organizational charts with defined reporting relationships and decision authorities.", vi:"Có sơ đồ tổ chức rõ ràng, quan hệ báo cáo & thẩm quyền quyết định minh bạch."},
+    {en:"Our management team can make operational decisions without owner approval for routine matters.", vi:"Ban quản trị tự quyết các việc thường nhật, không cần chủ sở hữu phê duyệt."},
+    {en:"We have documented job descriptions and performance expectations for all key roles.", vi:"Có mô tả công việc & kỳ vọng hiệu suất cho các vị trí chủ chốt."},
+    {en:"Succession planning exists for critical positions including ownership transition.", vi:"Có kế hoạch kế nhiệm cho vị trí quan trọng, gồm chuyển giao quyền sở hữu."},
+    {en:"We maintain appropriate governance structures (board meetings, management reviews, oversight).", vi:"Duy trì cơ chế quản trị phù hợp (họp hội đồng, rà soát quản lý, giám sát)."}
   ]},
   { keyEn:"Systems", keyVi:"Hệ thống", labelEn:"Systems Readiness", labelVi:"Mức độ sẵn sàng về Hệ thống", items:[
-    {en:"Monthly financial statements are produced within 15 business days of month-end.", vi:"Báo cáo tài chính hàng tháng được lập trong vòng 15 ngày làm việc sau khi kết thúc tháng."},
-    {en:"Our core business processes are documented, standardized, and consistently followed.", vi:"Các quy trình kinh doanh cốt lõi đã được chuẩn hoá, văn bản hoá và thực hiện nhất quán."},
-    {en:"We use integrated technology systems rather than manual spreadsheets for critical operations.", vi:"Doanh nghiệp sử dụng hệ thống công nghệ tích hợp thay cho bảng tính thủ công trong các nghiệp vụ quan trọng."},
-    {en:"Key performance indicators are tracked systematically with regular management reporting.", vi:"Các chỉ số hiệu suất chính được theo dõi có hệ thống, có báo cáo định kỳ cho ban quản trị."},
-    {en:"Our data quality enables reliable forecasting and business analysis.", vi:"Dữ liệu của chúng tôi đủ tin cậy để phục vụ dự báo và phân tích kinh doanh."}
+    {en:"Monthly financial statements are produced within 15 business days of month-end.", vi:"BCTC tháng hoàn tất trong 15 ngày làm việc sau tháng."},
+    {en:"Our core business processes are documented, standardized, and consistently followed.", vi:"Quy trình cốt lõi được văn bản hóa, chuẩn hóa và thực thi nhất quán."},
+    {en:"We use integrated technology systems rather than manual spreadsheets for critical operations.", vi:"Dùng hệ thống công nghệ tích hợp thay cho bảng tính thủ công ở nghiệp vụ trọng yếu."},
+    {en:"Key performance indicators are tracked systematically with regular management reporting.", vi:"Theo dõi KPI có hệ thống, có báo cáo định kỳ."},
+    {en:"Our data quality enables reliable forecasting and business analysis.", vi:"Chất lượng dữ liệu đủ tin cậy cho dự báo và phân tích."}
   ]},
   { keyEn:"Shared Values", keyVi:"Giá trị cốt lõi", labelEn:"Shared Values Readiness", labelVi:"Mức độ sẵn sàng về Giá trị cốt lõi", items:[
-    {en:"Our company mission, vision, and values are clearly defined and documented.", vi:"Doanh nghiệp có sứ mệnh, tầm nhìn và giá trị rõ ràng, được cụ thể hóa bằng văn bản."},
-    {en:"Company values guide decision-making consistently across the organization.", vi:"Các giá trị công ty được áp dụng nhất quán trong quá trình ra quyết định ở mọi cấp."},
-    {en:"Our culture supports professional management and can survive ownership transition.", vi:"Văn hoá doanh nghiệp hỗ trợ quản trị chuyên nghiệp và có khả năng duy trì khi chuyển giao quyền sở hữu."},
-    {en:"Employees understand and demonstrate company values in their daily work.", vi:"Nhân viên hiểu rõ và thể hiện các giá trị doanh nghiệp trong công việc hằng ngày."},
-    {en:"Our cultural strengths would be attractive to potential buyers or partners.", vi:"Những điểm mạnh văn hoá của chúng tôi đủ sức hấp dẫn với các nhà đầu tư hoặc đối tác tiềm năng."}
+    {en:"Our company mission, vision, and values are clearly defined and documented.", vi:"Có sứ mệnh, tầm nhìn, giá trị rõ ràng, được văn bản hóa."},
+    {en:"Company values guide decision-making consistently across the organization.", vi:"Giá trị công ty định hướng quyết định nhất quán toàn tổ chức."},
+    {en:"Our culture supports professional management and can survive ownership transition.", vi:"Văn hóa hỗ trợ quản trị chuyên nghiệp và bền vững khi chuyển giao sở hữu."},
+    {en:"Employees understand and demonstrate company values in their daily work.", vi:"Nhân viên hiểu và thể hiện giá trị trong công việc hằng ngày."},
+    {en:"Our cultural strengths would be attractive to potential buyers or partners.", vi:"Điểm mạnh văn hóa hấp dẫn nhà đầu tư/đối tác."}
   ]},
   { keyEn:"Style", keyVi:"Phong cách", labelEn:"Style Readiness", labelVi:"Mức độ sẵn sàng về Phong cách Quản lý", items:[
-    {en:"Leadership approach focuses on developing people rather than creating dependencies.", vi:"Cách tiếp cận lãnh đạo tập trung vào việc phát triển con người thay vì tạo ra sự phụ thuộc."},
-    {en:"Management decisions are made through systematic processes rather than crisis response.", vi:"Các quyết định quản lý được đưa ra dựa trên quy trình có hệ thống, thay vì phản ứng theo khủng hoảng."},
-    {en:"Communication flows effectively throughout the organization with regular feedback loops.", vi:"Dòng thông tin trong doanh nghiệp thông suốt, có cơ chế phản hồi thường xuyên và hiệu quả."},
-    {en:"Leadership team demonstrates consistency in decision-making and problem-solving approaches.", vi:"Đội ngũ lãnh đạo thể hiện sự nhất quán trong phong cách ra quyết định và xử lý vấn đề."},
-    {en:"Management style adapts appropriately to different situations and business needs.", vi:"Phong cách quản lý có khả năng thích ứng linh hoạt, phù hợp với từng tình huống và nhu cầu kinh doanh."}
+    {en:"Leadership approach focuses on developing people rather than creating dependencies.", vi:"Lãnh đạo tập trung phát triển con người thay vì tạo phụ thuộc."},
+    {en:"Management decisions are made through systematic processes rather than crisis response.", vi:"Quyết định dựa trên quy trình hệ thống, không phản ứng theo khủng hoảng."},
+    {en:"Communication flows effectively throughout the organization with regular feedback loops.", vi:"Thông tin luân chuyển hiệu quả, có vòng phản hồi thường xuyên."},
+    {en:"Leadership team demonstrates consistency in decision-making and problem-solving approaches.", vi:"Đội ngũ lãnh đạo nhất quán trong ra quyết định & xử lý vấn đề."},
+    {en:"Management style adapts appropriately to different situations and business needs.", vi:"Phong cách quản lý thích ứng linh hoạt theo tình huống & nhu cầu kinh doanh."}
   ]},
   { keyEn:"Staff", keyVi:"Nhân sự", labelEn:"Staff Readiness", labelVi:"Mức độ sẵn sàng về Nhân sự", items:[
-    {en:"We maintain low employee turnover with high engagement and job satisfaction.", vi:"Chúng tôi duy trì tỷ lệ nghỉ việc thấp, với mức độ gắn kết và hài lòng công việc cao."},
-    {en:"Key capabilities are distributed across multiple people rather than concentrated in individuals.", vi:"Các năng lực then chốt được trao quyền cho nhiều người, thay vì tập trung vào một cá nhân duy nhất."},
-    {en:"We have effective recruitment, training, and development programs for critical roles.", vi:"Chúng tôi có chương trình tuyển dụng, đào tạo và phát triển hiệu quả cho các vị trí trọng yếu."},
-    {en:"Performance management system ensures accountability and supports career development.", vi:"Hệ thống quản lý hiệu suất đảm bảo trách nhiệm rõ ràng và hỗ trợ phát triển sự nghiệp cho nhân viên."},
-    {en:"Our team has the skills and experience to deliver results independently.", vi:"Đội ngũ có kỹ năng và kinh nghiệm cần thiết để hoàn thành công việc một cách độc lập, không phụ thuộc quá mức vào giám sát."}
+    {en:"We maintain low employee turnover with high engagement and job satisfaction.", vi:"Tỷ lệ nghỉ việc thấp; gắn kết & hài lòng công việc cao."},
+    {en:"Key capabilities are distributed across multiple people rather than concentrated in individuals.", vi:"Năng lực then chốt phân bổ cho nhiều người, không dồn vào 1 cá nhân."},
+    {en:"We have effective recruitment, training, and development programs for critical roles.", vi:"Có tuyển dụng, đào tạo & phát triển hiệu quả cho vị trí trọng yếu."},
+    {en:"Performance management system ensures accountability and supports career development.", vi:"Hệ thống quản lý hiệu suất đảm bảo trách nhiệm & hỗ trợ phát triển nghề nghiệp."},
+    {en:"Our team has the skills and experience to deliver results independently.", vi:"Đội ngũ đủ kỹ năng/kinh nghiệm để tự chủ kết quả."}
   ]},
   { keyEn:"Skills", keyVi:"Kỹ năng", labelEn:"Skills Readiness", labelVi:"Mức độ sẵn sàng về Kỹ năng", items:[
-    {en:"Our core competencies and institutional knowledge are documented and transferable.", vi:"Năng lực cốt lõi được tài liệu hoá và chuyển giao được cùng tri thức doanh nghiệp."},
-    {en:"We have sustainable competitive advantages that don't depend on individual relationships.", vi:"Doanh nghiệp sở hữu lợi thế cạnh tranh bền vững, không phụ thuộc vào các mối quan hệ cá nhân."},
-    {en:"Critical skills and expertise can be maintained and developed under new ownership.", vi:"Các kỹ năng và chuyên môn then chốt có thể được duy trì và phát triển ngay cả khi chuyển giao quyền sở hữu."},
-    {en:"We invest in continuous learning and capability development across the organization.", vi:"Chúng tôi chú trọng đầu tư vào học tập liên tục và phát triển năng lực trên toàn doanh nghiệp."},
-    {en:"Our skill base supports both current operations and future growth requirements.", vi:"Nền tảng kỹ năng hiện tại vừa đáp ứng nhu cầu vận hành, vừa hỗ trợ định hướng tăng trưởng trong tương lai."}
+    {en:"Our core competencies and institutional knowledge are documented and transferable.", vi:"Năng lực cốt lõi & tri thức doanh nghiệp được tài liệu hoá và chuyển giao được."},
+    {en:"We have sustainable competitive advantages that don't depend on individual relationships.", vi:"Lợi thế cạnh tranh bền vững, không phụ thuộc quan hệ cá nhân."},
+    {en:"Critical skills and expertise can be maintained and developed under new ownership.", vi:"Kỹ năng/chuyên môn then chốt duy trì & phát triển được sau chuyển giao sở hữu."},
+    {en:"We invest in continuous learning and capability development across the organization.", vi:"Đầu tư học tập liên tục & phát triển năng lực toàn doanh nghiệp."},
+    {en:"Our skill base supports both current operations and future growth requirements.", vi:"Nền tảng kỹ năng đáp ứng vận hành hiện tại & tăng trưởng tương lai."}
   ]}
 ];
 
 /* ---------- Utilities & state ---------- */
 function cssVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
-const COLORS = {
-  navy: cssVar('--navy') || '#1e3a8a',
-  aqua: cssVar('--aqua') || '#6ecbd1',
-  lime: cssVar('--lime') || '#d7ff00',
-  grid: '#d7eef1',
-  ink: cssVar('--navy-ink') || '#0f1a49'
-};
-const state = {
-  totals: [], overall: 0, percent: 0,
-  category: { labelEn: '—', labelVi: '—', descEn: '', descVi: '', cls: '' },
-  top: [], low: []
-};
+const COLORS = { navy: cssVar('--navy')||'#1e3a8a', aqua: cssVar('--aqua')||'#6ecbd1', lime: cssVar('--lime')||'#d7ff00', grid:'#d7eef1' };
+const state = { totals: [], overall:0, percent:0, category:{ labelEn:'—', labelVi:'—', descEn:'', descVi:'', cls:'' }, top:[], low:[] };
 function toBase64Utf8(str){ return btoa(unescape(encodeURIComponent(str))); }
 
-/* ---------- Build after DOM ready ---------- */
+/* ---------- Build form ---------- */
 document.addEventListener('DOMContentLoaded', () => {
   const sectionsDiv = document.getElementById('sections');
-
   model.forEach((sec, sIdx)=>{
-    const wrap = document.createElement('div');
-    wrap.className = 'section';
-
-    const header = document.createElement('div');
-    header.className = 'section-header';
+    const wrap = document.createElement('div'); wrap.className = 'section';
+    const header = document.createElement('div'); header.className = 'section-header';
     header.innerHTML = `
-      <h3 class="label-duo">
-        <span class="en">${sec.labelEn}</span>
-        <span class="vi">${sec.labelVi}</span>
-      </h3>
-      <small id="sum_${sIdx}" class="label-duo">
-        <span class="en">Total: 0 / 25</span>
-        <span class="vi">Tổng: 0 / 25</span>
-      </small>`;
+      <h3 class="label-duo"><span class="en">${sec.labelEn}</span><span class="vi">${sec.labelVi}</span></h3>
+      <small id="sum_${sIdx}" class="label-duo"><span class="en">Total: 0 / 25</span><span class="vi">Tổng: 0 / 25</span></small>`;
     wrap.appendChild(header);
 
     sec.items.forEach((qa, qIdx)=>{
-      const row = document.createElement('div');
-      row.className = 'q';
-
+      const row = document.createElement('div'); row.className = 'q';
       const left = document.createElement('div');
-      left.innerHTML = `
-        <div class="label-duo">
-          <span class="en">${qIdx+1}. ${qa.en}</span>
-          <span class="vi small">${qIdx+1}. ${qa.vi}</span>
-        </div>`;
-
-      const right = document.createElement('div');
-      right.className = 'scale';
-
-      const radios = document.createElement('div');
-      radios.className = 'radios';
-
+      left.innerHTML = `<div class="label-duo">
+         <span class="en">${qIdx+1}. ${qa.en}</span>
+         <span class="vi small">${qIdx+1}. ${qa.vi}</span>
+       </div>`;
+      const right = document.createElement('div'); right.className = 'scale';
+      const radios = document.createElement('div'); radios.className = 'radios';
       for(let v=1; v<=5; v++){
         const id = `s${sIdx}_q${qIdx}_v${v}`;
-        const lbl = document.createElement('label');
-        lbl.htmlFor = id; lbl.title = v; lbl.style.cursor = 'pointer';
-        const input = document.createElement('input');
-        input.type = 'radio'; input.name = `s${sIdx}_q${qIdx}`; input.id = id; input.value = v;
-        if(v===3) input.checked = true;
-        input.addEventListener('change', computeAll);
-        lbl.appendChild(input);
-        lbl.appendChild(document.createTextNode(' '+v));
-        radios.appendChild(lbl);
+        const lbl = document.createElement('label'); lbl.htmlFor = id; lbl.title = v; lbl.style.cursor='pointer';
+        const input = document.createElement('input'); input.type='radio'; input.name=`s${sIdx}_q${qIdx}`; input.id=id; input.value=v;
+        if(v===3) input.checked = true; input.addEventListener('change', computeAll);
+        lbl.appendChild(input); lbl.appendChild(document.createTextNode(' '+v)); radios.appendChild(lbl);
       }
-
-      const hint = document.createElement('label');
-      hint.className = 'label-duo';
-      hint.innerHTML = `
-        <span class="en small"> (1 = Never/Poor, 5 = Always/Excellent)</span>
-        <span class="vi small"> (1 = Chưa bao giờ/Rất kém, 5 = Luôn luôn/Xuất sắc)</span>`;
-
-      right.appendChild(radios);
-      right.appendChild(hint);
-
-      row.appendChild(left);
-      row.appendChild(right);
-      wrap.appendChild(row);
+      const hint = document.createElement('label'); hint.className = 'label-duo';
+      hint.innerHTML = `<span class="en small">(1 = Never/Poor, 5 = Always/Excellent)</span>
+                        <span class="vi small">(1 = Chưa bao giờ/Rất kém, 5 = Luôn luôn/Xuất sắc)</span>`;
+      right.appendChild(radios); right.appendChild(hint);
+      row.appendChild(left); row.appendChild(right); wrap.appendChild(row);
     });
-
     sectionsDiv.appendChild(wrap);
   });
 
   document.getElementById('resetBtn').addEventListener('click', ()=>{
-    model.forEach((_, sIdx)=>{
-      for(let qIdx=0;qIdx<5;qIdx++){
-        const mid = document.getElementById(`s${sIdx}_q${qIdx}_v3`);
-        if(mid) mid.checked = true;
-      }
-    });
+    model.forEach((_, sIdx)=>{ for(let qIdx=0;qIdx<5;qIdx++){ const mid=document.getElementById(`s${sIdx}_q${qIdx}_v3`); if(mid) mid.checked=true; }});
     computeAll();
   });
 
@@ -343,307 +271,141 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ---------- Scoring & Radar ---------- */
 function getSectionScore(sIdx){
-  let sum = 0;
-  for(let qIdx=0; qIdx<5; qIdx++){
-    const name = `s${sIdx}_q${qIdx}`;
-    const el = document.querySelector(`input[name="${name}"]:checked`);
-    sum += el ? parseInt(el.value,10) : 0;
-  }
-  return sum; // 0..25
+  let sum=0; for(let qIdx=0;qIdx<5;qIdx++){ const sel=document.querySelector(`input[name="s${sIdx}_q${qIdx}"]:checked`); sum += sel?parseInt(sel.value,10):0; }
+  return sum;
 }
-
 function computeAll(){
-  const canvas = document.getElementById('radar');
-  const ctx = canvas.getContext('2d');
-  const totals = model.map((_, i)=> getSectionScore(i));
+  const canvas = document.getElementById('radar'); const ctx=canvas.getContext('2d');
+  const totals = model.map((_,i)=>getSectionScore(i));
+  totals.forEach((t,i)=>{ const el=document.getElementById(`sum_${i}`); if(el) el.innerHTML = `<span class="en">Total: ${t} / 25</span><span class="vi">Tổng: ${t} / 25</span>`; });
+  const overall = totals.reduce((a,b)=>a+b,0); const percent = Math.round((overall/175)*100);
+  document.getElementById('overallPill').textContent = `Total / Tổng: ${overall} / 175`; document.getElementById('percentPill').textContent = `${percent}%`;
 
-  totals.forEach((t,i)=>{
-    const el = document.getElementById(`sum_${i}`);
-    if(el) el.innerHTML = `
-      <span class="en">Total: ${t} / 25</span>
-      <span class="vi">Tổng: ${t} / 25</span>`;
-  });
-
-  const overall = totals.reduce((a,b)=>a+b,0);
-  const percent = Math.round((overall/175)*100);
-  document.getElementById('overallPill').textContent = `Total / Tổng: ${overall} / 175`;
-  document.getElementById('percentPill').textContent = `${percent}%`;
-
-  const badge = document.getElementById('categoryBadge');
-  const badgeText = document.getElementById('categoryText');
-
+  const badge = document.getElementById('categoryBadge'); const badgeText=document.getElementById('categoryText');
   let cls='', labelEn='', labelVi='', descEn='', descVi='';
-  if(overall>=150){
-    labelEn='Transaction Ready (85–100%)'; labelVi='Sẵn sàng giao dịch (85–100%)';
+  if(overall>=150){ labelEn='Transaction Ready (85–100%)'; labelVi='Sẵn sàng giao dịch (85–100%)';
     descEn='Strong foundation; professional systems; minimal buyer concerns; premium potential. Fine-tune and prepare for market.';
-    descVi='Nền tảng vững; hệ thống chuyên nghiệp; ít lo ngại từ nhà đầu tư; tiềm năng mức giá cao. Tinh chỉnh và sẵn sàng ra thị trường.';
-  }else if(overall>=125){
-    labelEn='Near Ready (70–84%)'; labelVi='Gần sẵn sàng (70–84%)';
-    descEn='Good foundation; address 2–3 priority gaps before market entry.';
-    descVi='Nền tảng tốt; cần xử lý 2–3 khoảng trống ưu tiên trước khi ra thị trường.';
-  }else if(overall>=100){
-    cls='mid';
-    labelEn='Development Needed (57–70%)'; labelVi='Cần phát triển (57–70%)';
+    descVi='Nền tảng vững; hệ thống chuyên nghiệp; ít lo ngại; tiềm năng giá cao. Tinh chỉnh & sẵn sàng ra thị trường.';}
+  else if(overall>=125){ labelEn='Near Ready (70–84%)'; labelVi='Gần sẵn sàng (70–84%)';
+    descEn='Good foundation; address 2–3 priority gaps before market entry.'; descVi='Nền tảng tốt; xử lý 2–3 khoảng trống ưu tiên trước khi ra thị trường.';}
+  else if(overall>=100){ cls='mid'; labelEn='Development Needed (57–70%)'; labelVi='Cần phát triển (57–70%)';
     descEn='Mixed performance; significant development likely required; potential valuation discount.';
-    descVi='Hiệu suất còn pha trộn; cần đầu tư phát triển đáng kể; có nguy cơ bị chiết khấu định giá.';
-  }else{
-    cls='low';
-    labelEn='Significant Gap (<57%)'; labelVi='Khoảng cách lớn (<57%)';
-    descEn='Major development needed; high buyer risk across multiple areas; likely discount or deal complexity.';
-    descVi='Cần phát triển lớn; rủi ro cao cho nhà đầu tư ở nhiều khía cạnh; dễ bị chiết khấu/điều kiện phức tạp.';
-  }
+    descVi='Hiệu suất pha trộn; cần đầu tư phát triển; có nguy cơ bị chiết khấu định giá.';}
+  else{ cls='low'; labelEn='Significant Gap (<57%)'; labelVi='Khoảng cách lớn (<57%)';
+    descEn='Major development needed; high buyer risk; likely discount or deal complexity.';
+    descVi='Cần phát triển lớn; rủi ro cao; dễ bị chiết khấu/điều kiện phức tạp.';}
   badge.className = `badge ${cls}`.trim();
   badge.innerHTML = `<span class="en">Readiness: ${labelEn}</span> · <span class="vi">Mức độ: ${labelVi}</span>`;
   badgeText.innerHTML = `<span class="en">${descEn}</span><br><span class="vi">${descVi}</span>`;
 
-  const values10 = totals.map(v => (v/25)*10);
-  drawRadar(ctx, canvas, values10, totals);
-
+  drawRadar(ctx, canvas, totals.map(v=>v/2.5), totals); // scale to 0–10
   const pairs = totals.map((v,i)=>({nameEn:model[i].keyEn, nameVi:model[i].keyVi, v}));
-  const top3 = [...pairs].sort((a,b)=>b.v-a.v).slice(0,3);
-  const low3 = [...pairs].sort((a,b)=>a.v-b.v).slice(0,3);
-  renderRank(document.getElementById('topList'), top3);
-  renderRank(document.getElementById('lowList'), low3);
-
-  // keep latest in state for email
-  state.totals = totals;
-  state.overall = overall;
-  state.percent = percent;
-  state.category = { labelEn, labelVi, descEn, descVi, cls };
-  state.top = top3;
-  state.low = low3;
+  const top3=[...pairs].sort((a,b)=>b.v-a.v).slice(0,3); const low3=[...pairs].sort((a,b)=>a.v-b.v).slice(0,3);
+  renderRank(document.getElementById('topList'), top3); renderRank(document.getElementById('lowList'), low3);
+  state.totals=totals; state.overall=overall; state.percent=percent; state.category={labelEn,labelVi,descEn,descVi,cls}; state.top=top3; state.low=low3;
 }
-
 function renderRank(container, arr){
-  container.innerHTML = '';
-  if(arr.length===0){ container.innerHTML = '<li>–</li>'; return; }
-  arr.forEach((p,i)=>{
-    const li = document.createElement('li');
-    li.innerHTML = `<span class="en">${i+1}. ${p.nameEn} — ${p.v} / 25</span><br><span class="vi small">${i+1}. ${p.nameVi} — ${p.v} / 25</span>`;
-    container.appendChild(li);
-  });
+  container.innerHTML=''; if(arr.length===0){container.innerHTML='<li>–</li>';return;}
+  arr.forEach((p,i)=>{ const li=document.createElement('li'); li.innerHTML=`<span class="en">${i+1}. ${p.nameEn} — ${p.v} / 25</span><br><span class="vi small">${i+1}. ${p.nameVi} — ${p.v} / 25</span>`; container.appendChild(li); });
 }
-
 function drawRadar(ctx, canvas, values, totals25){
-  const labels = model.map(m=>({en:m.keyEn, vi:m.keyVi}));
-  const w = canvas.width, h = canvas.height;
-  ctx.clearRect(0,0,w,h);
-  const cx = w*0.5, cy = h*0.52;
-  const radius = Math.min(w,h)*0.36;
-  const maxVal = 10;
-  const N = values.length;
-
-  // grid
-  for(let l=1;l<=5;l++){
-    const r = radius*(l/5);
-    ctx.beginPath();
-    for(let i=0;i<N;i++){
-      const ang = -Math.PI/2 + (i/N)*Math.PI*2;
-      const x = cx + Math.cos(ang)*r;
-      const y = cy + Math.sin(ang)*r;
-      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-    }
-    ctx.closePath();
-    ctx.lineWidth = (l===5)? 2.5 : 1;
-    ctx.strokeStyle = (l===5)? (getComputedStyle(document.documentElement).getPropertyValue('--lime').trim() || '#d7ff00') : '#d7eef1';
-    ctx.stroke();
-  }
-
-  // axes + labels (two lines: EN / VI)
-  const navy = getComputedStyle(document.documentElement).getPropertyValue('--navy').trim() || '#1e3a8a';
-  ctx.fillStyle = navy;
-  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  labels.forEach((lab,i)=>{
-    const ang = -Math.PI/2 + (i/N)*Math.PI*2;
-    const x = cx + Math.cos(ang)*radius;
-    const y = cy + Math.sin(ang)*radius;
-    ctx.strokeStyle = '#d7eef1';
-    ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(x,y); ctx.stroke();
-
-    const lx = cx + Math.cos(ang)*(radius+28);
-    const ly = cy + Math.sin(ang)*(radius+28);
-    ctx.font = '11px Montserrat, Arial, sans-serif';
-    ctx.fillText(lab.en.toUpperCase(), lx, ly-7);
-    ctx.font = '10px Montserrat, Arial, sans-serif';
-    ctx.fillText(lab.vi, lx, ly+8);
+  const labels = model.map(m=>({en:m.keyEn, vi:m.keyVi})); const w=canvas.width, h=canvas.height;
+  ctx.clearRect(0,0,w,h); const cx=w*0.5, cy=h*0.52; const radius=Math.min(w,h)*0.36; const N=values.length;
+  for(let l=1;l<=5;l++){ const r=radius*(l/5); ctx.beginPath(); for(let i=0;i<N;i++){ const a=-Math.PI/2+(i/N)*Math.PI*2; const x=cx+Math.cos(a)*r, y=cy+Math.sin(a)*r; if(i===0)ctx.moveTo(x,y); else ctx.lineTo(x,y);} ctx.closePath(); ctx.lineWidth=(l===5)?2.5:1; ctx.strokeStyle=(l===5)?(getComputedStyle(document.documentElement).getPropertyValue('--lime').trim()||'#d7ff00'):'#d7eef1'; ctx.stroke(); }
+  const navy = cssVar('--navy')||'#1e3a8a'; ctx.fillStyle=navy; ctx.textAlign='center'; ctx.textBaseline='middle';
+  labels.forEach((lab,i)=>{ const a=-Math.PI/2+(i/N)*Math.PI*2; const x=cx+Math.cos(a)*radius, y=cy+Math.sin(a)*radius;
+    ctx.strokeStyle='#d7eef1'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(x,y); ctx.stroke();
+    const lx=cx+Math.cos(a)*(radius+28), ly=cy+Math.sin(a)*(radius+28);
+    ctx.font='11px Montserrat, Arial, sans-serif'; ctx.fillText(lab.en.toUpperCase(), lx, ly-7);
+    ctx.font='10px Montserrat, Arial, sans-serif'; ctx.fillText(lab.vi, lx, ly+8);
   });
-
-  // polygon
-  ctx.beginPath();
-  values.forEach((v,i)=>{
-    const r = (v/maxVal)*radius;
-    const ang = -Math.PI/2 + (i/N)*Math.PI*2;
-    const x = cx + Math.cos(ang)*r;
-    const y = cy + Math.sin(ang)*r;
-    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-  });
-  ctx.closePath();
-  ctx.fillStyle = 'rgba(110,203,209,.25)';
-  ctx.strokeStyle = navy;
-  ctx.lineWidth = 2;
-  ctx.fill(); ctx.stroke();
-
-  // dots + numeric labels
-  ctx.fillStyle = navy;
-  ctx.font = '12px Montserrat, Arial, sans-serif';
-  values.forEach((v,i)=>{
-    const r = (v/maxVal)*radius;
-    const ang = -Math.PI/2 + (i/N)*Math.PI*2;
-    const x = cx + Math.cos(ang)*r;
-    const y = cy + Math.sin(ang)*r;
-    ctx.beginPath(); ctx.arc(x,y,3.5,0,Math.PI*2); ctx.fill();
-    const off = 14;
-    const lx = cx + Math.cos(ang)*(r + off);
-    const ly = cy + Math.sin(ang)*(r + off);
-    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillText(`${totals25[i]} / 25`, lx, ly);
-  });
+  ctx.beginPath(); values.forEach((v,i)=>{ const r=(v/10)*radius; const a=-Math.PI/2+(i/N)*Math.PI*2; const x=cx+Math.cos(a)*r, y=cy+Math.sin(a)*r; if(i===0)ctx.moveTo(x,y); else ctx.lineTo(x,y); });
+  ctx.closePath(); ctx.fillStyle='rgba(110,203,209,.25)'; ctx.strokeStyle=navy; ctx.lineWidth=2; ctx.fill(); ctx.stroke();
+  ctx.fillStyle=navy; ctx.font='12px Montserrat, Arial, sans-serif';
+  values.forEach((v,i)=>{ const r=(v/10)*radius; const a=-Math.PI/2+(i/N)*Math.PI*2; const x=cx+Math.cos(a)*r, y=cy+Math.sin(a)*r; ctx.beginPath(); ctx.arc(x,y,3.5,0,Math.PI*2); ctx.fill();
+    const off=14, lx=cx+Math.cos(a)*(r+off), ly=cy+Math.sin(a)*(r+off); ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(`${totals25[i]} / 25`, lx, ly);});
 }
 
-/* ---------- Collect full results (bilingual) ---------- */
+/* ---------- Email summary builders ---------- */
 function collectAnswers(){
-  const responses = [];
-  model.forEach((sec, sIdx)=>{
-    const secObj = { sectionEn: sec.keyEn, sectionVi: sec.keyVi, labelEn: sec.labelEn, labelVi: sec.labelVi, questions: [] };
-    sec.items.forEach((qa, qIdx)=>{
-      const name = `s${sIdx}_q${qIdx}`;
-      const el = document.querySelector(`input[name="${name}"]:checked`);
-      const val = el ? parseInt(el.value,10) : 0;
-      secObj.questions.push({ index: qIdx+1, textEn: qa.en, textVi: qa.vi, value: val });
-    });
+  const responses=[]; model.forEach((sec, sIdx)=>{ const secObj={ sectionEn:sec.keyEn, sectionVi:sec.keyVi, questions:[] };
+    sec.items.forEach((qa,qIdx)=>{ const sel=document.querySelector(`input[name="s${sIdx}_q${qIdx}"]:checked`); const val=sel?parseInt(sel.value,10):0; secObj.questions.push({ idx:qIdx+1, en:qa.en, vi:qa.vi, val });});
     responses.push(secObj);
-  });
-  return responses;
+  }); return responses;
 }
-
+function buildOwnerEmailBody(name,email){
+  // concise body to fit mailto: limits
+  const lines=[];
+  lines.push(`Lead: ${name} <${email}>`);
+  lines.push(`Overall / Tổng: ${state.overall} / 175 (${state.percent}%)`);
+  lines.push(`Readiness: ${state.category.labelEn} / ${state.category.labelVi}`);
+  lines.push('');
+  lines.push('Per-section (/25):');
+  model.forEach((m,i)=>lines.push(`- ${m.keyEn} / ${m.keyVi}: ${state.totals[i]} / 25`));
+  lines.push('');
+  lines.push('Top: ' + state.top.map(t=>`${t.nameEn}(${t.v})`).join(', '));
+  lines.push('Low: ' + state.low.map(t=>`${t.nameEn}(${t.v})`).join(', '));
+  return lines.join('\n');
+}
 function buildSummaryText(name='', email=''){
-  const lines = [];
-  lines.push('7S Valuation Readiness — Summary / Tóm tắt kết quả 7S');
+  const lines=[];
+  lines.push('7S Valuation Readiness — Summary / Tóm tắt 7S');
   lines.push(new Date().toLocaleString());
-  if(name) lines.push('Name / Tên: ' + name);
-  if(email) lines.push('Email: ' + email);
+  if(name) lines.push('Name / Tên: '+name);
+  if(email) lines.push('Email: '+email);
   lines.push('');
   lines.push(`Overall / Tổng: ${state.overall} / 175  (${state.percent}%)`);
   lines.push(`Readiness / Mức độ: ${state.category.labelEn} / ${state.category.labelVi}`);
-  lines.push(state.category.descEn);
-  lines.push(state.category.descVi);
-  lines.push('');
-  lines.push('Per-section (/25) · Điểm từng lĩnh vực (/25):');
+  lines.push(state.category.descEn); lines.push(state.category.descVi);
+  lines.push(''); lines.push('Per-section (/25):');
   model.forEach((m,i)=> lines.push(`- ${m.keyEn} / ${m.keyVi}: ${state.totals[i]} / 25`));
-  lines.push('');
-  lines.push('Top performers · Điểm cao nhất:');
-  state.top.forEach((t,i)=> lines.push(` ${i+1}. ${t.nameEn} / ${t.nameVi} — ${t.v} / 25`));
-  lines.push('Lowest performers · Điểm thấp nhất:');
-  state.low.forEach((t,i)=> lines.push(` ${i+1}. ${t.nameEn} / ${t.nameVi} — ${t.v} / 25`));
-  lines.push('');
-  lines.push('Detailed responses · Câu trả lời chi tiết:');
-  const answers = collectAnswers();
-  answers.forEach(sec=>{
-    lines.push(`\n[${sec.sectionEn} / ${sec.sectionVi}] ${sec.labelEn} / ${sec.labelVi}`);
-    sec.questions.forEach(q=>{
-      lines.push(`  Q${q.index}: (${q.value}) ${q.textEn}`);
-      lines.push(`          (${q.value}) ${q.textVi}`);
-    });
-  });
+  lines.push(''); lines.push('Top · Điểm cao: ' + state.top.map((t,i)=>`${i+1}. ${t.nameEn}/${t.nameVi} ${t.v}/25`).join('; '));
+  lines.push('Low · Điểm thấp: ' + state.low.map((t,i)=>`${i+1}. ${t.nameEn}/${t.nameVi} ${t.v}/25`).join('; '));
   return lines.join('\n');
 }
 
-function buildAnswersCsv(name, email){
-  const rows = [];
-  rows.push(['Timestamp','Name','Email','Section EN','Section VI','Question #','Score','Question EN','Question VI']);
-  const ts = new Date().toISOString();
-  const answers = collectAnswers();
-  answers.forEach(sec=>{
-    sec.questions.forEach(q=>{
-      rows.push([ts, name, email, sec.sectionEn, sec.sectionVi, q.index, q.value, q.textEn, q.textVi]);
-    });
-  });
-  const esc = v => {
-    const s = String(v ?? '');
-    return /[",\n]/.test(s) ? `"${s.replace(/"/g,'""')}"` : s;
-  };
-  return rows.map(r=> r.map(esc).join(',')).join('\n');
-}
-
-/* ---------- Email sending (strict: success only when server returns ok:true) ---------- */
+/* ---------- Send (backend if set; else mailto fallback to OWNER_EMAIL) ---------- */
 async function sendEmail(e){
-  e.preventDefault();
-  computeAll();
+  e.preventDefault(); computeAll();
+  const name=document.getElementById('fullName').value.trim();
+  const email=document.getElementById('emailAddr').value.trim();
+  const status=document.getElementById('sendStatus'); const btn=document.getElementById('sendBtn');
 
-  const name = document.getElementById('fullName').value.trim();
-  const email = document.getElementById('emailAddr').value.trim();
-  const status = document.getElementById('sendStatus');
-  const btn = document.getElementById('sendBtn');
+  if(!name || !email){ status.textContent='Please enter your name and a valid email. · Vui lòng nhập tên và email hợp lệ.'; return false; }
 
-  if(!name || !email){
-    status.textContent = 'Please enter your name and a valid email. · Vui lòng nhập tên và email hợp lệ.';
+  // If Apps Script is configured, use it (sends to client + CC)
+  if(EFFECTIVE_ENDPOINT && EFFECTIVE_ENDPOINT !== 'YOUR_APPS_SCRIPT_WEB_APP_URL'){
+    const canvas=document.getElementById('radar'); const radarBase64=canvas.toDataURL('image/png').split(',')[1];
+    const summaryText=buildSummaryText(name,email);
+
+    const payload={
+      name, email, cc: CC_EMAIL,
+      summary: summaryText,
+      radarBase64,
+      // keep these small to avoid bloat
+      summaryBase64: toBase64Utf8(summaryText), summaryFilename:'7S_summary_bilingual.txt'
+    };
+
+    btn.disabled=true; btn.textContent='Sending… · Đang gửi…'; status.textContent='';
+    try{
+      const res = await fetch(EFFECTIVE_ENDPOINT, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload) });
+      const txt = await res.text(); let ok=false; try{ ok = !!(JSON.parse(txt).ok); }catch(_){}
+      if(res.ok && ok){ status.textContent='✅ Sent! Check your inbox. · Đã gửi!'; }
+      else if(res.status===401||res.status===403){ status.textContent='❌ Access denied (Apps Script).'; }
+      else{ status.textContent='❌ Mailer error: ' + (txt||`HTTP ${res.status}`); }
+    }catch(err){ console.error(err); status.textContent='❌ Network error calling the mailer.'; }
+    finally{ btn.disabled=false; btn.textContent='Email my results · Gửi kết quả'; }
     return false;
   }
-  if(!EFFECTIVE_ENDPOINT || EFFECTIVE_ENDPOINT === 'YOUR_APPS_SCRIPT_WEB_APP_URL'){
-    status.textContent = 'Mailer not configured. Set EMAIL_ENDPOINT. · Chưa cấu hình địa chỉ gửi email.';
-    return false;
-  }
 
-  // capture radar PNG
-  const canvas = document.getElementById('radar');
-  const radarBase64 = canvas.toDataURL('image/png').split(',')[1];
+  // Otherwise: SIMPLE MODE — open your email client to send to OWNER_EMAIL
+  const ownerBody = buildOwnerEmailBody(name, email);
+  const subject = `7S Assessment — ${name} <${email}>`;
+  const mailto = `mailto:${encodeURIComponent(OWNER_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(ownerBody)}`;
 
-  // build attachments
-  const summaryText = buildSummaryText(name, email);
-  const answersCsv = buildAnswersCsv(name, email);
-  const jsonObj = {
-    timestamp: new Date().toISOString(),
-    name, email,
-    overall: state.overall, percent: state.percent,
-    category: state.category,
-    totalsBySection: model.map((m,i)=>({ keyEn:m.keyEn, keyVi:m.keyVi, labelEn:m.labelEn, labelVi:m.labelVi, total: state.totals[i] })),
-    top: state.top, low: state.low,
-    answers: collectAnswers()
-  };
-  const jsonText = JSON.stringify(jsonObj, null, 2);
-
-  const payload = {
-    name, email, cc: CC_EMAIL,
-    summary: summaryText,
-    radarBase64,
-    summaryBase64: toBase64Utf8(summaryText), summaryFilename: '7S_summary_bilingual.txt',
-    csvBase64: toBase64Utf8(answersCsv),     csvFilename: '7S_answers_bilingual.csv',
-    jsonBase64: toBase64Utf8(jsonText),      jsonFilename: '7S_results_bilingual.json'
-  };
-
-  btn.disabled = true;
-  btn.textContent = 'Sending... · Đang gửi...';
-  status.textContent = '';
-
-  try {
-    const res = await fetch(EFFECTIVE_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type':'text/plain;charset=utf-8' }, // avoids preflight with Apps Script
-      body: JSON.stringify(payload)
-    });
-
-    const text = await res.text();
-    let ok = false;
-    try { const data = JSON.parse(text); ok = !!(data && data.ok); } catch(_) { ok = false; }
-
-    if (res.ok && ok) {
-      status.textContent = '✅ Sent! Please check your inbox. · Đã gửi! Vui lòng kiểm tra hộp thư.';
-    } else if (res.status === 401 || res.status === 403) {
-      status.textContent = '❌ Access denied: set Web App access to “Anyone”. · Truy cập bị từ chối.';
-    } else if (res.status === 404) {
-      status.textContent = '❌ Endpoint not found: paste the /exec URL. · Không tìm thấy endpoint.';
-    } else {
-      status.textContent = '❌ Mailer error: ' + (text || `HTTP ${res.status}`);
-    }
-  } catch (err) {
-    console.error('Network error:', err);
-    status.textContent = '❌ Network error calling the mailer. · Lỗi mạng khi gọi dịch vụ gửi email.';
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Email my results · Gửi kết quả';
-  }
-
+  // Open mail client
+  window.location.href = mailto;
+  status.textContent = '✉️ Opening your email app with a prefilled summary to trang.tt@hsp.consulting… · Đang mở ứng dụng email của bạn.';
   return false;
 }
 </script>
