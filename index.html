@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>7S Valuation Readiness — Assessment</title>
+<title>7S Valuation Readiness — Định giá 7S</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -35,8 +35,15 @@
   }
   .header-inner{max-width:1200px;margin:0 auto;width:100%}
   .tag{display:inline-block;background:var(--lime);color:#10200a;font-weight:800;padding:10px 12px;border-radius:10px;letter-spacing:.5px;font-size:12px}
-  header h1{margin:8px 0 0 0;text-transform:uppercase;letter-spacing:.5px;font-weight:800;font-size:26px;line-height:1.1}
+  header h1{margin:8px 0 0 0;text-transform:uppercase;letter-spacing:.5px;font-weight:800;font-size:24px;line-height:1.15}
   header p{margin:6px 0 0 0;opacity:.95}
+
+  /* Dual-language helper styles */
+  .en{display:block}
+  .vi{display:block;color:var(--muted)}
+  .label-duo{line-height:1.25}
+  .vi.small{font-size:12px}
+  .en.small{font-size:12px}
 
   /* Main */
   main{
@@ -90,9 +97,15 @@
 <body>
 <header>
   <div class="header-inner">
-    <div class="tag">Workshop Tool</div>
-    <h1>From Numbers to Narrative — 7S Valuation Readiness</h1>
-    <p>Rate each statement 1–5 (1 = Never/Poor, 5 = Always/Excellent). Your 7S profile, rankings, and radar update live.</p>
+    <div class="tag">Workshop Tool • Công cụ workshop</div>
+    <h1 class="label-duo">
+      <span class="en">From Numbers to Narrative — 7S Valuation Readiness</span>
+      <span class="vi">Từ số liệu đến hiện trạng — Mức độ sẵn sàng định giá theo mô hình 7S</span>
+    </h1>
+    <p class="label-duo">
+      <span class="en">Rate each statement 1–5 (1 = Never/Poor, 5 = Always/Excellent). Your 7S profile, rankings, and radar update live.</span>
+      <span class="vi">Đánh giá điểm cho từng nội dung theo thang 1–5 (1 = Chưa bao giờ/Rất kém, 5 = Luôn luôn/Xuất sắc). Hồ sơ, xếp hạng và biểu đồ radar 7S của bạn cập nhật theo thời gian thực.</span>
+    </p>
   </div>
 </header>
 
@@ -100,110 +113,134 @@
   <div class="grid">
     <!-- LEFT -->
     <section class="card accent-aqua" id="formCard">
-      <h2>Comprehensive 7S Valuation Assessment</h2>
-      <p class="desc">Each section totals to /25. Overall is /175. Radar uses section totals (scaled to 0–10) and shows the <b>/25</b> score at each point.</p>
+      <h2 class="label-duo">
+        <span class="en">Comprehensive 7S Valuation Assessment</span>
+        <span class="vi">Đánh giá toàn diện khả năng định giá theo mô hình 7S</span>
+      </h2>
+      <p class="desc label-duo">
+        <span class="en">Each section totals to /25. Overall is /175. Radar uses section totals (scaled to 0–10) and shows the <b>/25</b> score at each point.</span>
+        <span class="vi">Mỗi lĩnh vực tối đa 25 điểm. Tổng điểm toàn bộ là 175. Biểu đồ radar sử dụng tổng điểm từng lĩnh vực (quy đổi 0–10) và hiển thị điểm <b>…/25</b> tại mỗi điểm trên biểu đồ.</span>
+      </p>
       <div id="sections"></div>
       <div class="actions">
-        <button id="resetBtn" class="secondary">Reset</button>
-        <!-- Download removed by request -->
+        <button id="resetBtn" class="secondary">Reset · Đặt lại</button>
       </div>
     </section>
 
     <!-- RIGHT -->
     <section class="card accent-lime">
-      <h2>Your 7S Readiness</h2>
+      <h2 class="label-duo">
+        <span class="en">Your 7S Readiness</span>
+        <span class="vi">Mức độ sẵn sàng theo mô hình 7S của bạn</span>
+      </h2>
 
       <!-- Email form -->
       <form id="emailForm" class="email-form" onsubmit="return sendEmail(event);">
         <div>
-          <label for="fullName">Your name</label>
+          <label for="fullName" class="label-duo">
+            <span class="en">Your name</span><span class="vi">Tên của bạn</span>
+          </label>
           <input id="fullName" name="fullName" type="text" placeholder="e.g., Nguyen Anh" required autocomplete="name">
         </div>
         <div>
-          <label for="emailAddr">Your email</label>
+          <label for="emailAddr" class="label-duo">
+            <span class="en">Your email</span><span class="vi">Email của bạn</span>
+          </label>
           <input id="emailAddr" name="emailAddr" type="email" inputmode="email" placeholder="you@example.com" required autocomplete="email">
         </div>
         <div>
-          <button id="sendBtn" type="submit" aria-label="Email my results">Email my results</button>
+          <button id="sendBtn" type="submit" aria-label="Email my results">Email my results · Gửi kết quả</button>
         </div>
       </form>
       <p id="sendStatus" class="desc" aria-live="polite"></p>
 
       <div class="totals" style="margin:10px 0">
-        <div><span class="pill" id="overallPill">Total: 0 / 175</span></div>
+        <div><span class="pill" id="overallPill">Total / Tổng: 0 / 175</span></div>
         <div><span class="pill" id="percentPill">0%</span></div>
       </div>
-      <div class="badge" id="categoryBadge">Readiness: —</div>
-      <p class="desc" id="categoryText" style="margin-top:8px">Complete the assessment to see classification and radar.</p>
+      <div class="badge" id="categoryBadge">Readiness / Mức độ: —</div>
+      <p class="desc" id="categoryText" style="margin-top:8px">Complete the assessment to see classification and radar. · Hoàn tất bài đánh giá để xem phân loại và biểu đồ radar.</p>
 
       <canvas id="radar" width="920" height="560" aria-label="7S Readiness Radar"></canvas>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
-        <div><h3>Top performers</h3><ul id="topList" class="rank"><li>–</li></ul></div>
-        <div><h3>Lowest performers</h3><ul id="lowList" class="rank"><li>–</li></ul></div>
+        <div>
+          <h3 class="label-duo"><span class="en">Top performers</span><span class="vi">Điểm cao nhất</span></h3>
+          <ul id="topList" class="rank"><li>–</li></ul>
+        </div>
+        <div>
+          <h3 class="label-duo"><span class="en">Lowest performers</span><span class="vi">Điểm thấp nhất</span></h3>
+          <ul id="lowList" class="rank"><li>–</li></ul>
+        </div>
       </div>
     </section>
   </div>
 
-  <footer>© 2025 — 7S Valuation Readiness (interactive). No external JS libraries.</footer>
+  <footer>© 2025 — 7S Valuation Readiness (interactive) · Bản tương tác song ngữ. No external JS libraries.</footer>
 </main>
 
 <script>
 /* ---------- Server endpoint (Apps Script Web App URL) ---------- */
 /* Replace with your deployed /exec URL from Apps Script */
-const EMAIL_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxYOURID/exec';
+const EMAIL_ENDPOINT = 'YOUR_APPS_SCRIPT_WEB_APP_URL';
 const CC_EMAIL = 'brian@hsp.consulting';
 
-/* ---------- Model ---------- */
+/* Optional: allow overriding via ?endpoint=... and persist in localStorage */
+const _qs = new URLSearchParams(location.search);
+const _qsEndpoint = (_qs.get('endpoint') || '').trim();
+if (_qsEndpoint) localStorage.setItem('EMAIL_ENDPOINT', _qsEndpoint);
+const EFFECTIVE_ENDPOINT = (_qsEndpoint || localStorage.getItem('EMAIL_ENDPOINT') || EMAIL_ENDPOINT).trim();
+
+/* ---------- Model (bilingual) ---------- */
 const model = [
-  { key:"Strategy", label:"Strategy Readiness", items:[
-    "We have a documented 3–5 year strategic plan that is reviewed and updated annually.",
-    "Our growth strategy includes specific market targets, resource requirements, and success metrics.",
-    "We systematically track competitive positioning and market trends to inform strategic decisions.",
-    "Our strategic priorities are clearly communicated and understood throughout the organization.",
-    "We have contingency plans for key business risks and market changes."
+  { keyEn:"Strategy", keyVi:"Chiến lược", labelEn:"Strategy Readiness", labelVi:"Mức độ Sẵn sàng về Chiến lược", items:[
+    {en:"We have a documented 3–5 year strategic plan that is reviewed and updated annually.", vi:"Chúng tôi có một kế hoạch chiến lược được lập cho giai đoạn 3–5 năm, được rà soát và cập nhật hàng năm."},
+    {en:"Our growth strategy includes specific market targets, resource requirements, and success metrics.", vi:"Chiến lược tăng trưởng của chúng tôi bao gồm các mục tiêu thị trường cụ thể, yêu cầu về nguồn lực và các chỉ số đo lường thành công."},
+    {en:"We systematically track competitive positioning and market trends to inform strategic decisions.", vi:"Chúng tôi theo dõi một cách có hệ thống vị thế cạnh tranh và xu hướng thị trường để hỗ trợ ra quyết định chiến lược."},
+    {en:"Our strategic priorities are clearly communicated and understood throughout the organization.", vi:"Các ưu tiên chiến lược được truyền đạt rõ ràng và được hiểu xuyên suốt trong toàn doanh nghiệp."},
+    {en:"We have contingency plans for key business risks and market changes.", vi:"Chúng tôi có các kế hoạch dự phòng để ứng phó với những rủi ro kinh doanh trọng yếu và thay đổi của thị trường."}
   ]},
-  { key:"Structure", label:"Structure Readiness", items:[
-    "We have clear organizational charts with defined reporting relationships and decision authorities.",
-    "Our management team can make operational decisions without owner approval for routine matters.",
-    "We have documented job descriptions and performance expectations for all key roles.",
-    "Succession planning exists for critical positions including ownership transition.",
-    "We maintain appropriate governance structures (board meetings, management reviews, oversight)."
+  { keyEn:"Structure", keyVi:"Cơ cấu", labelEn:"Structure Readiness", labelVi:"Mức độ sẵn sàng về Cơ cấu tổ chức", items:[
+    {en:"We have clear organizational charts with defined reporting relationships and decision authorities.", vi:"Chúng tôi có sơ đồ tổ chức rõ ràng, thể hiện đầy đủ mối quan hệ báo cáo và quyền ra quyết định."},
+    {en:"Our management team can make operational decisions without owner approval for routine matters.", vi:"Ban quản trị có thể đưa ra quyết định vận hành thường nhật mà không cần sự phê duyệt trực tiếp từ chủ sở hữu."},
+    {en:"We have documented job descriptions and performance expectations for all key roles.", vi:"Chúng tôi có bản mô tả công việc và kỳ vọng về hiệu suất cho tất cả các vị trí chủ chốt."},
+    {en:"Succession planning exists for critical positions including ownership transition.", vi:"Doanh nghiệp có kế hoạch kế nhiệm cho các vị trí quan trọng, bao gồm cả lộ trình chuyển giao quyền sở hữu."},
+    {en:"We maintain appropriate governance structures (board meetings, management reviews, oversight).", vi:"Chúng tôi duy trì hệ thống quản trị phù hợp (các cuộc họp hội đồng, rà soát quản lý, cơ chế giám sát)."}
   ]},
-  { key:"Systems", label:"Systems Readiness", items:[
-    "Monthly financial statements are produced within 15 business days of month-end.",
-    "Our core business processes are documented, standardized, and consistently followed.",
-    "We use integrated technology systems rather than manual spreadsheets for critical operations.",
-    "Key performance indicators are tracked systematically with regular management reporting.",
-    "Our data quality enables reliable forecasting and business analysis."
+  { keyEn:"Systems", keyVi:"Hệ thống", labelEn:"Systems Readiness", labelVi:"Mức độ sẵn sàng về Hệ thống", items:[
+    {en:"Monthly financial statements are produced within 15 business days of month-end.", vi:"Báo cáo tài chính hàng tháng được lập trong vòng 15 ngày làm việc sau khi kết thúc tháng."},
+    {en:"Our core business processes are documented, standardized, and consistently followed.", vi:"Các quy trình kinh doanh cốt lõi đã được chuẩn hoá, văn bản hoá và thực hiện nhất quán."},
+    {en:"We use integrated technology systems rather than manual spreadsheets for critical operations.", vi:"Doanh nghiệp sử dụng hệ thống công nghệ tích hợp thay cho bảng tính thủ công trong các nghiệp vụ quan trọng."},
+    {en:"Key performance indicators are tracked systematically with regular management reporting.", vi:"Các chỉ số hiệu suất chính được theo dõi có hệ thống, có báo cáo định kỳ cho ban quản trị."},
+    {en:"Our data quality enables reliable forecasting and business analysis.", vi:"Dữ liệu của chúng tôi đủ tin cậy để phục vụ dự báo và phân tích kinh doanh."}
   ]},
-  { key:"Shared Values", label:"Shared Values Readiness", items:[
-    "Our company mission, vision, and values are clearly defined and documented.",
-    "Company values guide decision-making consistently across the organization.",
-    "Our culture supports professional management and can survive ownership transition.",
-    "Employees understand and demonstrate company values in their daily work.",
-    "Our cultural strengths would be attractive to potential buyers or partners."
+  { keyEn:"Shared Values", keyVi:"Giá trị cốt lõi", labelEn:"Shared Values Readiness", labelVi:"Mức độ sẵn sàng về Giá trị cốt lõi", items:[
+    {en:"Our company mission, vision, and values are clearly defined and documented.", vi:"Doanh nghiệp có sứ mệnh, tầm nhìn và giá trị rõ ràng, được cụ thể hóa bằng văn bản."},
+    {en:"Company values guide decision-making consistently across the organization.", vi:"Các giá trị công ty được áp dụng nhất quán trong quá trình ra quyết định ở mọi cấp."},
+    {en:"Our culture supports professional management and can survive ownership transition.", vi:"Văn hoá doanh nghiệp hỗ trợ quản trị chuyên nghiệp và có khả năng duy trì khi chuyển giao quyền sở hữu."},
+    {en:"Employees understand and demonstrate company values in their daily work.", vi:"Nhân viên hiểu rõ và thể hiện các giá trị doanh nghiệp trong công việc hằng ngày."},
+    {en:"Our cultural strengths would be attractive to potential buyers or partners.", vi:"Những điểm mạnh văn hoá của chúng tôi đủ sức hấp dẫn với các nhà đầu tư hoặc đối tác tiềm năng."}
   ]},
-  { key:"Style", label:"Style Readiness", items:[
-    "Leadership approach focuses on developing people rather than creating dependencies.",
-    "Management decisions are made through systematic processes rather than crisis response.",
-    "Communication flows effectively throughout the organization with regular feedback loops.",
-    "Leadership team demonstrates consistency in decision-making and problem-solving approaches.",
-    "Management style adapts appropriately to different situations and business needs."
+  { keyEn:"Style", keyVi:"Phong cách", labelEn:"Style Readiness", labelVi:"Mức độ sẵn sàng về Phong cách Quản lý", items:[
+    {en:"Leadership approach focuses on developing people rather than creating dependencies.", vi:"Cách tiếp cận lãnh đạo tập trung vào việc phát triển con người thay vì tạo ra sự phụ thuộc."},
+    {en:"Management decisions are made through systematic processes rather than crisis response.", vi:"Các quyết định quản lý được đưa ra dựa trên quy trình có hệ thống, thay vì phản ứng theo khủng hoảng."},
+    {en:"Communication flows effectively throughout the organization with regular feedback loops.", vi:"Dòng thông tin trong doanh nghiệp thông suốt, có cơ chế phản hồi thường xuyên và hiệu quả."},
+    {en:"Leadership team demonstrates consistency in decision-making and problem-solving approaches.", vi:"Đội ngũ lãnh đạo thể hiện sự nhất quán trong phong cách ra quyết định và xử lý vấn đề."},
+    {en:"Management style adapts appropriately to different situations and business needs.", vi:"Phong cách quản lý có khả năng thích ứng linh hoạt, phù hợp với từng tình huống và nhu cầu kinh doanh."}
   ]},
-  { key:"Staff", label:"Staff Readiness", items:[
-    "We maintain low employee turnover with high engagement and job satisfaction.",
-    "Key capabilities are distributed across multiple people rather than concentrated in individuals.",
-    "We have effective recruitment, training, and development programs for critical roles.",
-    "Performance management system ensures accountability and supports career development.",
-    "Our team has the skills and experience to deliver results independently."
+  { keyEn:"Staff", keyVi:"Nhân sự", labelEn:"Staff Readiness", labelVi:"Mức độ sẵn sàng về Nhân sự", items:[
+    {en:"We maintain low employee turnover with high engagement and job satisfaction.", vi:"Chúng tôi duy trì tỷ lệ nghỉ việc thấp, với mức độ gắn kết và hài lòng công việc cao."},
+    {en:"Key capabilities are distributed across multiple people rather than concentrated in individuals.", vi:"Các năng lực then chốt được trao quyền cho nhiều người, thay vì tập trung vào một cá nhân duy nhất."},
+    {en:"We have effective recruitment, training, and development programs for critical roles.", vi:"Chúng tôi có chương trình tuyển dụng, đào tạo và phát triển hiệu quả cho các vị trí trọng yếu."},
+    {en:"Performance management system ensures accountability and supports career development.", vi:"Hệ thống quản lý hiệu suất đảm bảo trách nhiệm rõ ràng và hỗ trợ phát triển sự nghiệp cho nhân viên."},
+    {en:"Our team has the skills and experience to deliver results independently.", vi:"Đội ngũ có kỹ năng và kinh nghiệm cần thiết để hoàn thành công việc một cách độc lập, không phụ thuộc quá mức vào giám sát."}
   ]},
-  { key:"Skills", label:"Skills Readiness", items:[
-    "Our core competencies and institutional knowledge are documented and transferable.",
-    "We have sustainable competitive advantages that don't depend on individual relationships.",
-    "Critical skills and expertise can be maintained and developed under new ownership.",
-    "We invest in continuous learning and capability development across the organization.",
-    "Our skill base supports both current operations and future growth requirements."
+  { keyEn:"Skills", keyVi:"Kỹ năng", labelEn:"Skills Readiness", labelVi:"Mức độ sẵn sàng về Kỹ năng", items:[
+    {en:"Our core competencies and institutional knowledge are documented and transferable.", vi:"Năng lực cốt lõi được tài liệu hoá và chuyển giao được cùng tri thức doanh nghiệp."},
+    {en:"We have sustainable competitive advantages that don't depend on individual relationships.", vi:"Doanh nghiệp sở hữu lợi thế cạnh tranh bền vững, không phụ thuộc vào các mối quan hệ cá nhân."},
+    {en:"Critical skills and expertise can be maintained and developed under new ownership.", vi:"Các kỹ năng và chuyên môn then chốt có thể được duy trì và phát triển ngay cả khi chuyển giao quyền sở hữu."},
+    {en:"We invest in continuous learning and capability development across the organization.", vi:"Chúng tôi chú trọng đầu tư vào học tập liên tục và phát triển năng lực trên toàn doanh nghiệp."},
+    {en:"Our skill base supports both current operations and future growth requirements.", vi:"Nền tảng kỹ năng hiện tại vừa đáp ứng nhu cầu vận hành, vừa hỗ trợ định hướng tăng trưởng trong tương lai."}
   ]}
 ];
 
@@ -218,13 +255,10 @@ const COLORS = {
 };
 const state = {
   totals: [], overall: 0, percent: 0,
-  category: { label: '—', desc: '', cls: '' },
+  category: { labelEn: '—', labelVi: '—', descEn: '', descVi: '', cls: '' },
   top: [], low: []
 };
-function toBase64Utf8(str){
-  // handles Unicode safely
-  return btoa(unescape(encodeURIComponent(str)));
-}
+function toBase64Utf8(str){ return btoa(unescape(encodeURIComponent(str))); }
 
 /* ---------- Build after DOM ready ---------- */
 document.addEventListener('DOMContentLoaded', () => {
@@ -236,15 +270,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const header = document.createElement('div');
     header.className = 'section-header';
-    header.innerHTML = `<h3>${sec.label}</h3><small id="sum_${sIdx}">Total: 0 / 25</small>`;
+    header.innerHTML = `
+      <h3 class="label-duo">
+        <span class="en">${sec.labelEn}</span>
+        <span class="vi">${sec.labelVi}</span>
+      </h3>
+      <small id="sum_${sIdx}" class="label-duo">
+        <span class="en">Total: 0 / 25</span>
+        <span class="vi">Tổng: 0 / 25</span>
+      </small>`;
     wrap.appendChild(header);
 
-    sec.items.forEach((text, qIdx)=>{
+    sec.items.forEach((qa, qIdx)=>{
       const row = document.createElement('div');
       row.className = 'q';
 
       const left = document.createElement('div');
-      left.textContent = (qIdx+1) + '. ' + text;
+      left.innerHTML = `
+        <div class="label-duo">
+          <span class="en">${qIdx+1}. ${qa.en}</span>
+          <span class="vi small">${qIdx+1}. ${qa.vi}</span>
+        </div>`;
 
       const right = document.createElement('div');
       right.className = 'scale';
@@ -266,8 +312,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const hint = document.createElement('label');
-      hint.textContent = ' (1 = Never/Poor, 5 = Always/Excellent)';
-      hint.style.fontSize = '12px'; hint.style.color = 'var(--muted)';
+      hint.className = 'label-duo';
+      hint.innerHTML = `
+        <span class="en small"> (1 = Never/Poor, 5 = Always/Excellent)</span>
+        <span class="vi small"> (1 = Chưa bao giờ/Rất kém, 5 = Luôn luôn/Xuất sắc)</span>`;
 
       right.appendChild(radios);
       right.appendChild(hint);
@@ -311,29 +359,47 @@ function computeAll(){
 
   totals.forEach((t,i)=>{
     const el = document.getElementById(`sum_${i}`);
-    if(el) el.textContent = `Total: ${t} / 25`;
+    if(el) el.innerHTML = `
+      <span class="en">Total: ${t} / 25</span>
+      <span class="vi">Tổng: ${t} / 25</span>`;
   });
 
   const overall = totals.reduce((a,b)=>a+b,0);
   const percent = Math.round((overall/175)*100);
-  document.getElementById('overallPill').textContent = `Total: ${overall} / 175`;
+  document.getElementById('overallPill').textContent = `Total / Tổng: ${overall} / 175`;
   document.getElementById('percentPill').textContent = `${percent}%`;
 
   const badge = document.getElementById('categoryBadge');
   const badgeText = document.getElementById('categoryText');
-  let cat='', cls=''; let desc='';
-  if(overall>=150){cat='Transaction Ready (85–100%)'; desc='Strong foundation; professional systems; minimal buyer concerns; premium potential. Fine-tune and prepare for market.';}
-  else if(overall>=125){cat='Near Ready (70–84%)'; desc='Good foundation; address 2–3 priority gaps before market entry.';}
-  else if(overall>=100){cat='Development Needed (57–70%)'; cls='mid'; desc='Mixed performance; significant development likely required; potential valuation discount.';}
-  else{cat='Significant Gap (<57%)'; cls='low'; desc='Major development needed; high buyer risk across multiple areas; likely discount or deal complexity.';}
+
+  let cls='', labelEn='', labelVi='', descEn='', descVi='';
+  if(overall>=150){
+    labelEn='Transaction Ready (85–100%)'; labelVi='Sẵn sàng giao dịch (85–100%)';
+    descEn='Strong foundation; professional systems; minimal buyer concerns; premium potential. Fine-tune and prepare for market.';
+    descVi='Nền tảng vững; hệ thống chuyên nghiệp; ít lo ngại từ nhà đầu tư; tiềm năng mức giá cao. Tinh chỉnh và sẵn sàng ra thị trường.';
+  }else if(overall>=125){
+    labelEn='Near Ready (70–84%)'; labelVi='Gần sẵn sàng (70–84%)';
+    descEn='Good foundation; address 2–3 priority gaps before market entry.';
+    descVi='Nền tảng tốt; cần xử lý 2–3 khoảng trống ưu tiên trước khi ra thị trường.';
+  }else if(overall>=100){
+    cls='mid';
+    labelEn='Development Needed (57–70%)'; labelVi='Cần phát triển (57–70%)';
+    descEn='Mixed performance; significant development likely required; potential valuation discount.';
+    descVi='Hiệu suất còn pha trộn; cần đầu tư phát triển đáng kể; có nguy cơ bị chiết khấu định giá.';
+  }else{
+    cls='low';
+    labelEn='Significant Gap (<57%)'; labelVi='Khoảng cách lớn (<57%)';
+    descEn='Major development needed; high buyer risk across multiple areas; likely discount or deal complexity.';
+    descVi='Cần phát triển lớn; rủi ro cao cho nhà đầu tư ở nhiều khía cạnh; dễ bị chiết khấu/điều kiện phức tạp.';
+  }
   badge.className = `badge ${cls}`.trim();
-  badge.textContent = `Readiness: ${cat}`;
-  badgeText.textContent = desc;
+  badge.innerHTML = `<span class="en">Readiness: ${labelEn}</span> · <span class="vi">Mức độ: ${labelVi}</span>`;
+  badgeText.innerHTML = `<span class="en">${descEn}</span><br><span class="vi">${descVi}</span>`;
 
   const values10 = totals.map(v => (v/25)*10);
   drawRadar(ctx, canvas, values10, totals);
 
-  const pairs = totals.map((v,i)=>({name:model[i].key, v}));
+  const pairs = totals.map((v,i)=>({nameEn:model[i].keyEn, nameVi:model[i].keyVi, v}));
   const top3 = [...pairs].sort((a,b)=>b.v-a.v).slice(0,3);
   const low3 = [...pairs].sort((a,b)=>a.v-b.v).slice(0,3);
   renderRank(document.getElementById('topList'), top3);
@@ -343,7 +409,7 @@ function computeAll(){
   state.totals = totals;
   state.overall = overall;
   state.percent = percent;
-  state.category = { label: cat, desc, cls };
+  state.category = { labelEn, labelVi, descEn, descVi, cls };
   state.top = top3;
   state.low = low3;
 }
@@ -353,13 +419,13 @@ function renderRank(container, arr){
   if(arr.length===0){ container.innerHTML = '<li>–</li>'; return; }
   arr.forEach((p,i)=>{
     const li = document.createElement('li');
-    li.textContent = `${i+1}. ${p.name} — ${p.v} / 25`;
+    li.innerHTML = `<span class="en">${i+1}. ${p.nameEn} — ${p.v} / 25</span><br><span class="vi small">${i+1}. ${p.nameVi} — ${p.v} / 25</span>`;
     container.appendChild(li);
   });
 }
 
 function drawRadar(ctx, canvas, values, totals25){
-  const labels = model.map(m=>m.key);
+  const labels = model.map(m=>({en:m.keyEn, vi:m.keyVi}));
   const w = canvas.width, h = canvas.height;
   ctx.clearRect(0,0,w,h);
   const cx = w*0.5, cy = h*0.52;
@@ -383,10 +449,10 @@ function drawRadar(ctx, canvas, values, totals25){
     ctx.stroke();
   }
 
-  // axes + labels
+  // axes + labels (two lines: EN / VI)
   const navy = getComputedStyle(document.documentElement).getPropertyValue('--navy').trim() || '#1e3a8a';
   ctx.fillStyle = navy;
-  ctx.font = '12px Montserrat, Arial, sans-serif';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   labels.forEach((lab,i)=>{
     const ang = -Math.PI/2 + (i/N)*Math.PI*2;
     const x = cx + Math.cos(ang)*radius;
@@ -394,10 +460,13 @@ function drawRadar(ctx, canvas, values, totals25){
     ctx.strokeStyle = '#d7eef1';
     ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(x,y); ctx.stroke();
-    const lx = cx + Math.cos(ang)*(radius+22);
-    const ly = cy + Math.sin(ang)*(radius+22);
-    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillText(lab.toUpperCase(), lx, ly);
+
+    const lx = cx + Math.cos(ang)*(radius+28);
+    const ly = cy + Math.sin(ang)*(radius+28);
+    ctx.font = '11px Montserrat, Arial, sans-serif';
+    ctx.fillText(lab.en.toUpperCase(), lx, ly-7);
+    ctx.font = '10px Montserrat, Arial, sans-serif';
+    ctx.fillText(lab.vi, lx, ly+8);
   });
 
   // polygon
@@ -432,16 +501,16 @@ function drawRadar(ctx, canvas, values, totals25){
   });
 }
 
-/* ---------- Collect full results ---------- */
+/* ---------- Collect full results (bilingual) ---------- */
 function collectAnswers(){
   const responses = [];
   model.forEach((sec, sIdx)=>{
-    const secObj = { sectionKey: sec.key, sectionLabel: sec.label, questions: [] };
-    sec.items.forEach((text, qIdx)=>{
+    const secObj = { sectionEn: sec.keyEn, sectionVi: sec.keyVi, labelEn: sec.labelEn, labelVi: sec.labelVi, questions: [] };
+    sec.items.forEach((qa, qIdx)=>{
       const name = `s${sIdx}_q${qIdx}`;
       const el = document.querySelector(`input[name="${name}"]:checked`);
       const val = el ? parseInt(el.value,10) : 0;
-      secObj.questions.push({ index: qIdx+1, text, value: val });
+      secObj.questions.push({ index: qIdx+1, textEn: qa.en, textVi: qa.vi, value: val });
     });
     responses.push(secObj);
   });
@@ -450,29 +519,31 @@ function collectAnswers(){
 
 function buildSummaryText(name='', email=''){
   const lines = [];
-  lines.push('7S Valuation Readiness — Summary');
+  lines.push('7S Valuation Readiness — Summary / Tóm tắt kết quả 7S');
   lines.push(new Date().toLocaleString());
-  if(name) lines.push('Name: ' + name);
+  if(name) lines.push('Name / Tên: ' + name);
   if(email) lines.push('Email: ' + email);
   lines.push('');
-  lines.push(`Overall: ${state.overall} / 175  (${state.percent}%)`);
-  lines.push(`Readiness: ${state.category.label}`);
-  lines.push(state.category.desc);
+  lines.push(`Overall / Tổng: ${state.overall} / 175  (${state.percent}%)`);
+  lines.push(`Readiness / Mức độ: ${state.category.labelEn} / ${state.category.labelVi}`);
+  lines.push(state.category.descEn);
+  lines.push(state.category.descVi);
   lines.push('');
-  lines.push('Per-section (/25):');
-  model.forEach((m,i)=> lines.push(`- ${m.key}: ${state.totals[i]} / 25`));
+  lines.push('Per-section (/25) · Điểm từng lĩnh vực (/25):');
+  model.forEach((m,i)=> lines.push(`- ${m.keyEn} / ${m.keyVi}: ${state.totals[i]} / 25`));
   lines.push('');
-  lines.push('Top performers:');
-  state.top.forEach((t,i)=> lines.push(` ${i+1}. ${t.name} — ${t.v} / 25`));
-  lines.push('Lowest performers:');
-  state.low.forEach((t,i)=> lines.push(` ${i+1}. ${t.name} — ${t.v} / 25`));
+  lines.push('Top performers · Điểm cao nhất:');
+  state.top.forEach((t,i)=> lines.push(` ${i+1}. ${t.nameEn} / ${t.nameVi} — ${t.v} / 25`));
+  lines.push('Lowest performers · Điểm thấp nhất:');
+  state.low.forEach((t,i)=> lines.push(` ${i+1}. ${t.nameEn} / ${t.nameVi} — ${t.v} / 25`));
   lines.push('');
-  lines.push('Detailed responses:');
+  lines.push('Detailed responses · Câu trả lời chi tiết:');
   const answers = collectAnswers();
   answers.forEach(sec=>{
-    lines.push(`\n[${sec.sectionKey}] ${sec.sectionLabel}`);
+    lines.push(`\n[${sec.sectionEn} / ${sec.sectionVi}] ${sec.labelEn} / ${sec.labelVi}`);
     sec.questions.forEach(q=>{
-      lines.push(`  Q${q.index}: (${q.value}) ${q.text}`);
+      lines.push(`  Q${q.index}: (${q.value}) ${q.textEn}`);
+      lines.push(`          (${q.value}) ${q.textVi}`);
     });
   });
   return lines.join('\n');
@@ -480,15 +551,14 @@ function buildSummaryText(name='', email=''){
 
 function buildAnswersCsv(name, email){
   const rows = [];
-  rows.push(['Timestamp','Name','Email','Section','Question #','Score','Question Text']);
+  rows.push(['Timestamp','Name','Email','Section EN','Section VI','Question #','Score','Question EN','Question VI']);
   const ts = new Date().toISOString();
   const answers = collectAnswers();
   answers.forEach(sec=>{
     sec.questions.forEach(q=>{
-      rows.push([ts, name, email, sec.sectionKey, q.index, q.value, q.text]);
+      rows.push([ts, name, email, sec.sectionEn, sec.sectionVi, q.index, q.value, q.textEn, q.textVi]);
     });
   });
-  // CSV encode
   const esc = v => {
     const s = String(v ?? '');
     return /[",\n]/.test(s) ? `"${s.replace(/"/g,'""')}"` : s;
@@ -496,7 +566,7 @@ function buildAnswersCsv(name, email){
   return rows.map(r=> r.map(esc).join(',')).join('\n');
 }
 
-/* ---------- Email sending ---------- */
+/* ---------- Email sending (strict: success only when server returns ok:true) ---------- */
 async function sendEmail(e){
   e.preventDefault();
   computeAll();
@@ -507,18 +577,17 @@ async function sendEmail(e){
   const btn = document.getElementById('sendBtn');
 
   if(!name || !email){
-    status.textContent = 'Please enter your name and a valid email.';
+    status.textContent = 'Please enter your name and a valid email. · Vui lòng nhập tên và email hợp lệ.';
     return false;
   }
-  if(!EMAIL_ENDPOINT || EMAIL_ENDPOINT === 'https://script.google.com/macros/s/AKfycbxYOURID/exec'){
-    status.textContent = 'Mailer not configured. Please set EMAIL_ENDPOINT.';
+  if(!EFFECTIVE_ENDPOINT || EFFECTIVE_ENDPOINT === 'YOUR_APPS_SCRIPT_WEB_APP_URL'){
+    status.textContent = 'Mailer not configured. Set EMAIL_ENDPOINT. · Chưa cấu hình địa chỉ gửi email.';
     return false;
   }
 
-  // capture radar PNG (base64 without prefix)
+  // capture radar PNG
   const canvas = document.getElementById('radar');
-  const dataUrl = canvas.toDataURL('image/png');
-  const radarBase64 = dataUrl.split(',')[1];
+  const radarBase64 = canvas.toDataURL('image/png').split(',')[1];
 
   // build attachments
   const summaryText = buildSummaryText(name, email);
@@ -528,7 +597,7 @@ async function sendEmail(e){
     name, email,
     overall: state.overall, percent: state.percent,
     category: state.category,
-    totalsBySection: model.map((m,i)=>({ key:m.key, label:m.label, total: state.totals[i] })),
+    totalsBySection: model.map((m,i)=>({ keyEn:m.keyEn, keyVi:m.keyVi, labelEn:m.labelEn, labelVi:m.labelVi, total: state.totals[i] })),
     top: state.top, low: state.low,
     answers: collectAnswers()
   };
@@ -538,70 +607,44 @@ async function sendEmail(e){
     name, email, cc: CC_EMAIL,
     summary: summaryText,
     radarBase64,
-    summaryBase64: toBase64Utf8(summaryText),
-    summaryFilename: '7S_summary.txt',
-    csvBase64: toBase64Utf8(answersCsv),
-    csvFilename: '7S_answers.csv',
-    jsonBase64: toBase64Utf8(jsonText),
-    jsonFilename: '7S_results.json'
+    summaryBase64: toBase64Utf8(summaryText), summaryFilename: '7S_summary_bilingual.txt',
+    csvBase64: toBase64Utf8(answersCsv),     csvFilename: '7S_answers_bilingual.csv',
+    jsonBase64: toBase64Utf8(jsonText),      jsonFilename: '7S_results_bilingual.json'
   };
 
   btn.disabled = true;
-  btn.textContent = 'Sending...';
+  btn.textContent = 'Sending... · Đang gửi...';
   status.textContent = '';
 
-  const markSuccess = () => {
-    status.textContent = '✅ Sent! Please check your inbox.';
-    btn.disabled = false;
-    btn.textContent = 'Email my results';
-  };
-  const markError = (msg='❌ Could not send email. Please try again later.') => {
-    status.textContent = msg;
-    btn.disabled = false;
-    btn.textContent = 'Email my results';
-  };
-
   try {
-    const res = await fetch(EMAIL_ENDPOINT, {
+    const res = await fetch(EFFECTIVE_ENDPOINT, {
       method: 'POST',
-      headers: { 'Content-Type':'text/plain;charset=utf-8' }, // avoids preflight
+      headers: { 'Content-Type':'text/plain;charset=utf-8' }, // avoids preflight with Apps Script
       body: JSON.stringify(payload)
     });
 
-    if (res.ok) {
-      try {
-        const data = await res.json();
-        if (data && data.ok) return markSuccess();
-        const t = await res.text().catch(()=>null);
-        return markError(t ? `❌ Mailer error: ${t}` : '❌ Mailer responded but did not confirm success.');
-      } catch(_){
-        // JSON unreadable (CORS). 2xx still means server ran; treat as success.
-        return markSuccess();
-      }
+    const text = await res.text();
+    let ok = false;
+    try { const data = JSON.parse(text); ok = !!(data && data.ok); } catch(_) { ok = false; }
+
+    if (res.ok && ok) {
+      status.textContent = '✅ Sent! Please check your inbox. · Đã gửi! Vui lòng kiểm tra hộp thư.';
+    } else if (res.status === 401 || res.status === 403) {
+      status.textContent = '❌ Access denied: set Web App access to “Anyone”. · Truy cập bị từ chối.';
+    } else if (res.status === 404) {
+      status.textContent = '❌ Endpoint not found: paste the /exec URL. · Không tìm thấy endpoint.';
     } else {
-      if (res.status === 401 || res.status === 403) {
-        return markError('❌ Access denied: set Apps Script Web App access to “Anyone”.');
-      }
-      if (res.status === 404) {
-        return markError('❌ Endpoint not found: double-check you pasted the /exec URL.');
-      }
-      return markError(`❌ HTTP ${res.status}: please re-deploy your Web App and use the /exec URL.`);
+      status.textContent = '❌ Mailer error: ' + (text || `HTTP ${res.status}`);
     }
   } catch (err) {
-    // Fallback: opaque no-cors (server still executes doPost)
-    try {
-      await fetch(EMAIL_ENDPOINT, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type':'text/plain;charset=utf-8' },
-        body: JSON.stringify(payload)
-      });
-      return markSuccess();
-    } catch (err2) {
-      console.error('Mailer error:', err, err2);
-      return markError();
-    }
+    console.error('Network error:', err);
+    status.textContent = '❌ Network error calling the mailer. · Lỗi mạng khi gọi dịch vụ gửi email.';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Email my results · Gửi kết quả';
   }
+
+  return false;
 }
 </script>
 </body>
