@@ -6,39 +6,20 @@
 <title>7S Valuation Readiness — Định giá 7S</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --navy:#1e3a8a;
-    --navy-ink:#0f1a49;
-    --aqua:#6ecbd1;
-    --lime:#d7ff00;
-    --white:#ffffff;
-    --muted:#5b6b8c;
-    --line:#e6edf6;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;background:var(--white);color:var(--navy-ink);
-    font-family:'Montserrat',ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-  }
-  header{
-    background:var(--navy);color:#fff;min-height:210px;
-    display:flex;align-items:center;padding:28px 18px;
-  }
+  :root{ --navy:#1e3a8a; --navy-ink:#0f1a49; --aqua:#6ecbd1; --lime:#d7ff00; --white:#ffffff; --muted:#5b6b8c; --line:#e6edf6; }
+  *{box-sizing:border-box} html,body{height:100%}
+  body{ margin:0;background:var(--white);color:var(--navy-ink);font-family:'Montserrat',ui-sans-serif,-apple-system,Segoe UI,Roboto,Helvetica,Arial; }
+  header{ background:var(--navy);color:#fff;min-height:210px;display:flex;align-items:center;padding:28px 18px; }
   .header-inner{max-width:1200px;margin:0 auto;width:100%}
   .tag{display:inline-block;background:var(--lime);color:#10200a;font-weight:800;padding:10px 12px;border-radius:10px;letter-spacing:.5px;font-size:12px}
   header h1{margin:8px 0 0 0;text-transform:uppercase;letter-spacing:.5px;font-weight:800;font-size:24px;line-height:1.15}
   header p{margin:6px 0 0 0;opacity:.95}
-  .en{display:block}
-  .vi{display:block;color:var(--muted)}
-  .label-duo{line-height:1.25}
-  .vi.small,.en.small{font-size:12px}
+  .en{display:block} .vi{display:block;color:var(--muted)} .label-duo{line-height:1.25} .vi.small,.en.small{font-size:12px}
+
   main{max-width:1200px;margin:16px auto 24px auto;padding:0 18px 24px}
-  .grid{display:grid;grid-template-columns:1.15fr 1fr;gap:18px}
-  @media (max-width:980px){.grid{grid-template-columns:1fr}}
+  .grid{display:grid;grid-template-columns:1.15fr 1fr;gap:18px} @media (max-width:980px){.grid{grid-template-columns:1fr}}
   .card{background:#fff;border:2px solid var(--line);border-radius:16px;box-shadow:0 6px 24px rgba(20,35,90,.06);padding:16px}
-  .accent-aqua{border-color:var(--aqua)}
-  .accent-lime{border-color:var(--lime)}
+  .accent-aqua{border-color:var(--aqua)} .accent-lime{border-color:var(--lime)}
   h2{margin:0 0 8px 0;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;font-weight:800;font-size:18px}
   h3{margin:12px 0 6px 0;text-transform:uppercase;letter-spacing:.4px;font-weight:700;color:var(--navy);font-size:14px}
   .desc{font-size:13px;color:var(--muted)}
@@ -47,21 +28,22 @@
   .section-header small{color:var(--muted);font-weight:600}
   .q{display:grid;grid-template-columns:1fr auto;gap:10px;padding:10px 0;border-bottom:1px dashed #e9eef8}
   .q:last-child{border-bottom:0}
-  .radios{display:flex;gap:10px}
-  .radios input{accent-color:var(--navy)}
+  .radios{display:flex;gap:10px} .radios input{accent-color:var(--navy)}
   .scale label{font-size:12px;color:var(--muted)}
+
   .totals{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
   .pill{display:inline-block;padding:7px 12px;border-radius:999px;border:2px solid var(--aqua);background:#f8feff;color:var(--navy);font-size:12px;font-weight:700}
   .badge{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:2px solid var(--lime);background:#fcffeb;color:#142b0a;font-weight:800;text-transform:uppercase;letter-spacing:.4px}
-  .badge.mid{border-color:#ffe08a;background:#fff9e6;color:#7a4a00}
-  .badge.low{border-color:#ffc9c9;background:#fff1f1;color:#6b0f0f}
+  .badge.mid{border-color:#ffe08a;background:#fff9e6;color:#7a4a00} .badge.low{border-color:#ffc9c9;background:#fff1f1;color:#6b0f0f}
+
   .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
   button{border:0;background:var(--navy);color:#fff;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:800;letter-spacing:.3px;text-transform:uppercase}
-  button.secondary{background:#fff;color:var(--navy);border:2px solid var(--navy)}
-  button:hover{filter:brightness(.95)}
+  button.secondary{background:#fff;color:var(--navy);border:2px solid var(--navy)} button:hover{filter:brightness(.95)}
+
   canvas{width:100%;height:auto;max-height:560px;background:#fff;border:3px solid var(--lime);border-radius:16px}
   ul.rank{margin:8px 0 0 18px;padding:0} ul.rank li{margin:4px 0;font-weight:600;color:var(--navy-ink)}
   footer{margin:24px 0 10px;text-align:center;color:var(--muted);font-size:12px}
+
   .email-form{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;margin:10px 0 12px}
   .email-form label{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.3px}
   .email-form input{width:100%;padding:10px 12px;border:2px solid var(--line);border-radius:10px;font-family:inherit}
@@ -154,17 +136,8 @@
 </main>
 
 <script>
-/* ---------- Mail settings ---------- */
-/* If you have Apps Script, paste your /exec here. If left as-is, we fall back to mailto. */
-cconst EMAIL_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyPXSapa5ZXeaX3Yjbo7IWDAqbENVRBcFOJcGizJ6OCd0e721ngIUB8zgMIc--E4eJxfA/exec';
-const OWNER_EMAIL = 'trang.tt@hsp.consulting';   // where simple emails go
-const CC_EMAIL    = 'brian@hsp.consulting';      // cc when using backend
-
-/* Optional: override via ?endpoint=... */
-const _qs = new URLSearchParams(location.search);
-const _qsEndpoint = (_qs.get('endpoint') || '').trim();
-if (_qsEndpoint) localStorage.setItem('EMAIL_ENDPOINT', _qsEndpoint);
-const EFFECTIVE_ENDPOINT = (_qsEndpoint || localStorage.getItem('EMAIL_ENDPOINT') || EMAIL_ENDPOINT).trim();
+/* ---------- Direct mail endpoint (your /exec URL) ---------- */
+const EMAIL_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyPXSapa5ZXeaX3Yjbo7IWDAqbENVRBcFOJcGizJ6OCd0e721ngIUB8zgMIc--E4eJxfA/exec';
 
 /* ---------- Bilingual model ---------- */
 const model = [
@@ -211,10 +184,10 @@ const model = [
     {en:"Our team has the skills and experience to deliver results independently.", vi:"Đội ngũ đủ kỹ năng/kinh nghiệm để tự chủ kết quả."}
   ]},
   { keyEn:"Skills", keyVi:"Kỹ năng", labelEn:"Skills Readiness", labelVi:"Mức độ sẵn sàng về Kỹ năng", items:[
-    {en:"Our core competencies and institutional knowledge are documented and transferable.", vi:"Năng lực cốt lõi & tri thức doanh nghiệp được tài liệu hoá và chuyển giao được."},
+    {en:"Our core competencies and institutional knowledge are documented and transferable.", vi:"Năng lực cốt lõi & tri thức DN được tài liệu hoá và chuyển giao được."},
     {en:"We have sustainable competitive advantages that don't depend on individual relationships.", vi:"Lợi thế cạnh tranh bền vững, không phụ thuộc quan hệ cá nhân."},
-    {en:"Critical skills and expertise can be maintained and developed under new ownership.", vi:"Kỹ năng/chuyên môn then chốt duy trì & phát triển được sau chuyển giao sở hữu."},
-    {en:"We invest in continuous learning and capability development across the organization.", vi:"Đầu tư học tập liên tục & phát triển năng lực toàn doanh nghiệp."},
+    {en:"Critical skills and expertise can be maintained and developed under new ownership.", vi:"Kỹ năng/chuyên môn then chốt duy trì & phát triển được sau chuyển giao."},
+    {en:"We invest in continuous learning and capability development across the organization.", vi:"Đầu tư học tập liên tục & phát triển năng lực toàn DN."},
     {en:"Our skill base supports both current operations and future growth requirements.", vi:"Nền tảng kỹ năng đáp ứng vận hành hiện tại & tăng trưởng tương lai."}
   ]}
 ];
@@ -229,30 +202,30 @@ function toBase64Utf8(str){ return btoa(unescape(encodeURIComponent(str))); }
 document.addEventListener('DOMContentLoaded', () => {
   const sectionsDiv = document.getElementById('sections');
   model.forEach((sec, sIdx)=>{
-    const wrap = document.createElement('div'); wrap.className = 'section';
-    const header = document.createElement('div'); header.className = 'section-header';
+    const wrap = document.createElement('div'); wrap.className='section';
+    const header = document.createElement('div'); header.className='section-header';
     header.innerHTML = `
       <h3 class="label-duo"><span class="en">${sec.labelEn}</span><span class="vi">${sec.labelVi}</span></h3>
       <small id="sum_${sIdx}" class="label-duo"><span class="en">Total: 0 / 25</span><span class="vi">Tổng: 0 / 25</span></small>`;
     wrap.appendChild(header);
 
     sec.items.forEach((qa, qIdx)=>{
-      const row = document.createElement('div'); row.className = 'q';
+      const row = document.createElement('div'); row.className='q';
       const left = document.createElement('div');
       left.innerHTML = `<div class="label-duo">
          <span class="en">${qIdx+1}. ${qa.en}</span>
          <span class="vi small">${qIdx+1}. ${qa.vi}</span>
        </div>`;
-      const right = document.createElement('div'); right.className = 'scale';
-      const radios = document.createElement('div'); radios.className = 'radios';
+      const right = document.createElement('div'); right.className='scale';
+      const radios = document.createElement('div'); radios.className='radios';
       for(let v=1; v<=5; v++){
         const id = `s${sIdx}_q${qIdx}_v${v}`;
-        const lbl = document.createElement('label'); lbl.htmlFor = id; lbl.title = v; lbl.style.cursor='pointer';
+        const lbl = document.createElement('label'); lbl.htmlFor=id; lbl.title=v; lbl.style.cursor='pointer';
         const input = document.createElement('input'); input.type='radio'; input.name=`s${sIdx}_q${qIdx}`; input.id=id; input.value=v;
-        if(v===3) input.checked = true; input.addEventListener('change', computeAll);
+        if(v===3) input.checked=true; input.addEventListener('change', computeAll);
         lbl.appendChild(input); lbl.appendChild(document.createTextNode(' '+v)); radios.appendChild(lbl);
       }
-      const hint = document.createElement('label'); hint.className = 'label-duo';
+      const hint = document.createElement('label'); hint.className='label-duo';
       hint.innerHTML = `<span class="en small">(1 = Never/Poor, 5 = Always/Excellent)</span>
                         <span class="vi small">(1 = Chưa bao giờ/Rất kém, 5 = Luôn luôn/Xuất sắc)</span>`;
       right.appendChild(radios); right.appendChild(hint);
@@ -284,12 +257,12 @@ function computeAll(){
   const badge = document.getElementById('categoryBadge'); const badgeText=document.getElementById('categoryText');
   let cls='', labelEn='', labelVi='', descEn='', descVi='';
   if(overall>=150){ labelEn='Transaction Ready (85–100%)'; labelVi='Sẵn sàng giao dịch (85–100%)';
-    descEn='Strong foundation; professional systems; minimal buyer concerns; premium potential. Fine-tune and prepare for market.';
-    descVi='Nền tảng vững; hệ thống chuyên nghiệp; ít lo ngại; tiềm năng giá cao. Tinh chỉnh & sẵn sàng ra thị trường.';}
+    descEn='Strong foundation; professional systems; minimal buyer concerns; premium potential.';
+    descVi='Nền tảng vững; hệ thống chuyên nghiệp; ít lo ngại; tiềm năng giá cao.';}
   else if(overall>=125){ labelEn='Near Ready (70–84%)'; labelVi='Gần sẵn sàng (70–84%)';
     descEn='Good foundation; address 2–3 priority gaps before market entry.'; descVi='Nền tảng tốt; xử lý 2–3 khoảng trống ưu tiên trước khi ra thị trường.';}
   else if(overall>=100){ cls='mid'; labelEn='Development Needed (57–70%)'; labelVi='Cần phát triển (57–70%)';
-    descEn='Mixed performance; significant development likely required; potential valuation discount.';
+    descEn='Mixed performance; significant development required; potential valuation discount.';
     descVi='Hiệu suất pha trộn; cần đầu tư phát triển; có nguy cơ bị chiết khấu định giá.';}
   else{ cls='low'; labelEn='Significant Gap (<57%)'; labelVi='Khoảng cách lớn (<57%)';
     descEn='Major development needed; high buyer risk; likely discount or deal complexity.';
@@ -326,26 +299,12 @@ function drawRadar(ctx, canvas, values, totals25){
     const off=14, lx=cx+Math.cos(a)*(r+off), ly=cy+Math.sin(a)*(r+off); ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(`${totals25[i]} / 25`, lx, ly);});
 }
 
-/* ---------- Email summary builders ---------- */
+/* ---------- Collect results & build payload ---------- */
 function collectAnswers(){
   const responses=[]; model.forEach((sec, sIdx)=>{ const secObj={ sectionEn:sec.keyEn, sectionVi:sec.keyVi, questions:[] };
-    sec.items.forEach((qa,qIdx)=>{ const sel=document.querySelector(`input[name="s${sIdx}_q${qIdx}"]:checked`); const val=sel?parseInt(sel.value,10):0; secObj.questions.push({ idx:qIdx+1, en:qa.en, vi:qa.vi, val });});
+    sec.items.forEach((qa,qIdx)=>{ const sel=document.querySelector(`input[name="s${sIdx}_q${qIdx}"]:checked`); const val=sel?parseInt(sel.value,10):0; secObj.questions.push({ index:qIdx+1, textEn:qa.en, textVi:qa.vi, value:val });});
     responses.push(secObj);
   }); return responses;
-}
-function buildOwnerEmailBody(name,email){
-  // concise body to fit mailto: limits
-  const lines=[];
-  lines.push(`Lead: ${name} <${email}>`);
-  lines.push(`Overall / Tổng: ${state.overall} / 175 (${state.percent}%)`);
-  lines.push(`Readiness: ${state.category.labelEn} / ${state.category.labelVi}`);
-  lines.push('');
-  lines.push('Per-section (/25):');
-  model.forEach((m,i)=>lines.push(`- ${m.keyEn} / ${m.keyVi}: ${state.totals[i]} / 25`));
-  lines.push('');
-  lines.push('Top: ' + state.top.map(t=>`${t.nameEn}(${t.v})`).join(', '));
-  lines.push('Low: ' + state.low.map(t=>`${t.nameEn}(${t.v})`).join(', '));
-  return lines.join('\n');
 }
 function buildSummaryText(name='', email=''){
   const lines=[];
@@ -361,10 +320,26 @@ function buildSummaryText(name='', email=''){
   model.forEach((m,i)=> lines.push(`- ${m.keyEn} / ${m.keyVi}: ${state.totals[i]} / 25`));
   lines.push(''); lines.push('Top · Điểm cao: ' + state.top.map((t,i)=>`${i+1}. ${t.nameEn}/${t.nameVi} ${t.v}/25`).join('; '));
   lines.push('Low · Điểm thấp: ' + state.low.map((t,i)=>`${i+1}. ${t.nameEn}/${t.nameVi} ${t.v}/25`).join('; '));
+  lines.push('');
+  lines.push('Detailed responses · Câu trả lời chi tiết:');
+  collectAnswers().forEach(sec=>{
+    lines.push(`\n[${sec.sectionEn} / ${sec.sectionVi}]`);
+    sec.questions.forEach(q=>{
+      lines.push(`  Q${q.index}: (${q.value}) ${q.textEn}`);
+      lines.push(`          (${q.value}) ${q.textVi}`);
+    });
+  });
   return lines.join('\n');
 }
+function buildAnswersCsv(name, email){
+  const rows=[['Timestamp','Name','Email','Section EN','Section VI','Question #','Score','Question EN','Question VI']];
+  const ts=new Date().toISOString();
+  collectAnswers().forEach(sec=>{ sec.questions.forEach(q=>{ rows.push([ts,name,email,sec.sectionEn,sec.sectionVi,q.index,q.value,q.textEn,q.textVi]); }); });
+  const esc=v=>{ const s=String(v??''); return /[",\n]/.test(s)?`"${s.replace(/"/g,'""')}"`:s; };
+  return rows.map(r=>r.map(esc).join(',')).join('\n');
+}
 
-/* ---------- Send (backend if set; else mailto fallback to OWNER_EMAIL) ---------- */
+/* ---------- Send (direct to Apps Script) ---------- */
 async function sendEmail(e){
   e.preventDefault(); computeAll();
   const name=document.getElementById('fullName').value.trim();
@@ -373,39 +348,42 @@ async function sendEmail(e){
 
   if(!name || !email){ status.textContent='Please enter your name and a valid email. · Vui lòng nhập tên và email hợp lệ.'; return false; }
 
-  // If Apps Script is configured, use it (sends to client + CC)
-  if(EFFECTIVE_ENDPOINT && EFFECTIVE_ENDPOINT !== 'https://script.google.com/macros/s/AKfycbyPXSapa5ZXeaX3Yjbo7IWDAqbENVRBcFOJcGizJ6OCd0e721ngIUB8zgMIc--E4eJxfA/exec'){
-    const canvas=document.getElementById('radar'); const radarBase64=canvas.toDataURL('image/png').split(',')[1];
-    const summaryText=buildSummaryText(name,email);
+  // build attachments and payload
+  const canvas=document.getElementById('radar'); const radarBase64=canvas.toDataURL('image/png').split(',')[1];
+  const summaryText=buildSummaryText(name,email);
+  const answersCsv = buildAnswersCsv(name,email);
+  const jsonObj = {
+    timestamp:new Date().toISOString(), name, email,
+    overall:state.overall, percent:state.percent, category:state.category,
+    totalsBySection: model.map((m,i)=>({ keyEn:m.keyEn, keyVi:m.keyVi, total: state.totals[i] })),
+    top:state.top, low:state.low, answers: collectAnswers()
+  };
+  const jsonText = JSON.stringify(jsonObj, null, 2);
 
-    const payload={
-      name, email, cc: CC_EMAIL,
-      summary: summaryText,
-      radarBase64,
-      // keep these small to avoid bloat
-      summaryBase64: toBase64Utf8(summaryText), summaryFilename:'7S_summary_bilingual.txt'
-    };
+  const payload = {
+    name, email,
+    summary: summaryText,
+    radarBase64,
+    summaryBase64: toBase64Utf8(summaryText), summaryFilename:'7S_summary_bilingual.txt',
+    csvBase64: toBase64Utf8(answersCsv),     csvFilename:'7S_answers_bilingual.csv',
+    jsonBase64: toBase64Utf8(jsonText),      jsonFilename:'7S_results_bilingual.json'
+  };
 
-    btn.disabled=true; btn.textContent='Sending… · Đang gửi…'; status.textContent='';
-    try{
-      const res = await fetch(EFFECTIVE_ENDPOINT, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload) });
-      const txt = await res.text(); let ok=false; try{ ok = !!(JSON.parse(txt).ok); }catch(_){}
-      if(res.ok && ok){ status.textContent='✅ Sent! Check your inbox. · Đã gửi!'; }
-      else if(res.status===401||res.status===403){ status.textContent='❌ Access denied (Apps Script).'; }
-      else{ status.textContent='❌ Mailer error: ' + (txt||`HTTP ${res.status}`); }
-    }catch(err){ console.error(err); status.textContent='❌ Network error calling the mailer.'; }
-    finally{ btn.disabled=false; btn.textContent='Email my results · Gửi kết quả'; }
-    return false;
+  btn.disabled=true; btn.textContent='Sending… · Đang gửi…'; status.textContent='';
+
+  try{
+    const res = await fetch(EMAIL_ENDPOINT, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload) });
+    const txt = await res.text(); let ok=false; try{ ok = !!(JSON.parse(txt).ok); }catch(_){}
+    if(res.ok && ok){ status.textContent='✅ Sent! Please check your inbox. · Đã gửi! Vui lòng kiểm tra hộp thư.'; }
+    else if(res.status===401||res.status===403){ status.textContent='❌ Access denied: in Apps Script, set Web App access to “Anyone”.'; }
+    else if(res.status===404){ status.textContent='❌ Endpoint not found: verify the /exec URL in this file.'; }
+    else { status.textContent='❌ Mailer error: ' + (txt || `HTTP ${res.status}`); }
+  }catch(err){
+    console.error(err);
+    status.textContent='❌ Network error calling the mailer.';
+  }finally{
+    btn.disabled=false; btn.textContent='Email my results · Gửi kết quả';
   }
-
-  // Otherwise: SIMPLE MODE — open your email client to send to OWNER_EMAIL
-  const ownerBody = buildOwnerEmailBody(name, email);
-  const subject = `7S Assessment — ${name} <${email}>`;
-  const mailto = `mailto:${encodeURIComponent(OWNER_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(ownerBody)}`;
-
-  // Open mail client
-  window.location.href = mailto;
-  status.textContent = '✉️ Opening your email app with a prefilled summary to trang.tt@hsp.consulting… · Đang mở ứng dụng email của bạn.';
   return false;
 }
 </script>
